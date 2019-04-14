@@ -1,17 +1,13 @@
 package us.thehealthyway.healthywayappandroid;
 
-import android.content.Context;
-import android.os.Debug;
-import android.support.annotation.NonNull;
-import android.support.constraint.solver.widgets.Helper;
+import androidx.annotation.NonNull;
+
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,17 +19,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Dictionary;
-import java.util.EventListener;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 // My Android constants
-import static android.support.constraint.Constraints.TAG;
+import static us.thehealthyway.healthywayappandroid.AppData.TAG;
 import static us.thehealthyway.healthywayappandroid.AppData.DEBUG;
 
 
