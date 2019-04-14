@@ -3,4 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="hw_green">#588436</color>
+    <color name="hw_purple">#4a2353</color>
+    <color name="hw_blue">#90F2F9</color>
+    <color name="hw_white">#ffffff</color>
 </resources>
