@@ -373,6 +373,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="-8dp"
             android:layout_marginEnd="8dp"
+            android:background="@color/hw_input_green"
             android:ems="10"
             android:gravity="start|top"
             android:inputType="textMultiLine"
@@ -390,6 +391,8 @@
             android:id="@+id/meal_selections"
             android:layout_width="0dp"
             android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:clickable="true"
             android:clipChildren="true"
             android:clipToPadding="true"
@@ -459,6 +462,386 @@
                 android:textAppearance="@style/HWTabText" />
         </LinearLayout>
 
+        <EditText
+            android:id="@+id/enter_meal_description"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/hw_input_green"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:overScrollMode="ifContentScrolls"
+            android:scrollbarAlwaysDrawHorizontalTrack="true"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
+            android:textAlignment="textStart"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_meal_description" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/journal_center_guideline"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:id="@+id/label_meal_description"
+            android:layout_width="0dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Meal description"
+            android:textAlignment="center"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/meal_selections" />
+
+        <TextView
+            android:id="@+id/label_starch"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
+            android:text="@string/grid_header_starch"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/journal_center_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/enter_meal_description" />
+
+        <EditText
+            android:id="@+id/enter_starch_consumption"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
+            android:background="@color/hw_input_green"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:text="9.9"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/label_veggies"
+            app:layout_constraintStart_toEndOf="@+id/label_starch"
+            app:layout_constraintTop_toTopOf="@+id/label_starch" />
+
+        <TextView
+            android:id="@+id/label_fruit"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
+            android:text="@string/grid_header_fruits"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/journal_center_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/label_starch" />
+
+        <EditText
+            android:id="@+id/enter_fruit_consumption"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
+            android:background="@color/hw_input_green"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:text="9.9"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@+id/label_fruit"
+            app:layout_constraintTop_toTopOf="@+id/label_fruit" />
+
+        <TextView
+            android:id="@+id/label_protein"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
+            android:text="@string/protein"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/enter_protein_consumption"
+            app:layout_constraintTop_toTopOf="@+id/enter_protein_consumption" />
+
+        <EditText
+            android:id="@+id/enter_protein_consumption"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/hw_input_green"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:text="9.9"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/label_starch"
+            app:layout_constraintTop_toTopOf="@+id/label_starch" />
+
+        <TextView
+            android:id="@+id/label_fat"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
+            android:text="@string/fat"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/enter_fat_consumption"
+            app:layout_constraintTop_toTopOf="@+id/label_fruit" />
+
+        <EditText
+            android:id="@+id/enter_fat_consumption"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/hw_input_green"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:text="9.9"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/label_fruit"
+            app:layout_constraintTop_toTopOf="@+id/label_fruit" />
+
+        <TextView
+            android:id="@+id/label_veggies"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:text="@string/veggies"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/enter_starch_consumption"
+            app:layout_constraintTop_toTopOf="@+id/enter_starch_consumption" />
+
+        <EditText
+            android:id="@+id/enter_veggies_consumption"
+            android:layout_width="48dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/hw_input_green"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:text="9.9"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@+id/label_veggies"
+            app:layout_constraintTop_toTopOf="@+id/label_starch" />
+
+        <TextView
+            android:id="@+id/label_meal_comments"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Meal Comments"
+            android:textAlignment="center"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/enter_fruit_consumption" />
+
+        <EditText
+            android:id="@+id/enter_meal_comments"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/hw_input_green"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:overScrollMode="ifContentScrolls"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_meal_comments" />
+
+        <androidx.gridlayout.widget.GridLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:columnCount="6"
+            app:layout_constraintBottom_toTopOf="@+id/copyrightText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/enter_meal_comments"
+            app:layout_constraintVertical_bias="1.0">
+
+
+            <TextView
+                android:layout_width="50sp"
+                android:text="@string/single_space"
+                android:textAlignment="viewEnd"
+                app:layout_column="0"
+                app:layout_row="0" />
+
+            <TextView
+                android:layout_width="50sp"
+                android:layout_height="wrap_content"
+                android:text="Daily"
+                android:textAlignment="viewEnd"
+                app:layout_column="0"
+                app:layout_row="1" />
+
+            <TextView
+                android:layout_width="50sp"
+                android:text="Today"
+                android:textAlignment="viewEnd"
+                app:layout_column="0"
+                app:layout_row="2" />
+
+            <TextView
+                android:layout_width="50sp"
+                android:text="Total"
+                android:textAlignment="viewEnd"
+                app:layout_column="0"
+                app:layout_row="3" />
+
+
+            <TextView
+                android:layout_width="50sp"
+                android:text="@string/grid_header_protein"
+                android:textAlignment="viewEnd"
+                app:layout_column="1"
+                app:layout_row="0" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:text="@string/label_decimal_zero"
+                android:textAlignment="center"
+                app:layout_column="1"
+                app:layout_row="1" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:text="@string/label_decimal_zero"
+                android:textAlignment="center"
+                app:layout_column="1"
+                app:layout_row="2" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:text="@string/label_decimal_zero"
+                android:textAlignment="center"
+                app:layout_column="1"
+                app:layout_row="3" />
+
+
+            <TextView
+                android:layout_width="50sp"
+                android:text="@string/grid_header_fat"
+                android:textAlignment="center"
+                app:layout_column="2"
+                app:layout_row="0" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:text="@string/label_decimal_zero"
+                android:textAlignment="center"
+                app:layout_column="2"
+                app:layout_row="1" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:text="@string/label_decimal_zero"
+                android:textAlignment="center"
+                app:layout_column="2"
+                app:layout_row="2" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:text="@string/label_decimal_zero"
+                android:textAlignment="center"
+                app:layout_column="2"
+                app:layout_row="3" />
+
+
+            <TextView
+                android:layout_width="50sp"
+                android:text="@string/grid_header_starch"
+                android:textAlignment="center"
+                app:layout_column="3"
+                app:layout_row="0" />
+
+            <TextView
+
+                android:layout_width="50dp"
+                android:text="@string/label_decimal_zero"
+                android:textAlignment="center"
+                app:layout_column="3"
+                app:layout_row="1" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:text="@string/label_decimal_zero"
+                android:textAlignment="center"
+                app:layout_column="3"
+                app:layout_row="2" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:text="@string/label_decimal_zero"
+                android:textAlignment="center"
+                app:layout_column="3"
+                app:layout_row="3" />
+
+
+            <TextView
+                android:layout_width="50sp"
+                android:text="@string/grid_header_fruits"
+                android:textAlignment="center"
+                app:layout_column="4"
+                app:layout_row="0" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:text="@string/label_decimal_zero"
+                android:textAlignment="center"
+                app:layout_column="4"
+                app:layout_row="1" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:text="@string/label_decimal_zero"
+                android:textAlignment="center"
+                app:layout_column="4"
+                app:layout_row="2" />
+
+            <TextView
+                android:layout_width="50dp"
+                android:text="@string/label_decimal_zero"
+                android:textAlignment="center"
+                app:layout_column="4"
+                app:layout_row="3" />
+
+
+            <TextView
+                android:layout_width="60sp"
+                android:text="@string/grid_header_veggies"
+                android:textAlignment="center"
+                app:layout_column="5"
+                app:layout_row="0" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:text="@string/label_decimal_zero"
+                android:textAlignment="center"
+                app:layout_column="5"
+                app:layout_row="1" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:text="@string/label_decimal_zero"
+                android:textAlignment="center"
+                app:layout_column="5"
+                app:layout_row="2" />
+
+            <TextView
+                android:layout_width="60dp"
+                android:text="@string/label_decimal_zero"
+                android:textAlignment="center"
+                app:layout_column="5"
+                app:layout_row="3" />
+
+
+        </androidx.gridlayout.widget.GridLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
