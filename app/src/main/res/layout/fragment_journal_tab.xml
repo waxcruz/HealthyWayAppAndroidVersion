@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TabJournal">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_journal_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toTopOf="@android:id/message"
+        app:layout_constraintTop_toBottomOf="@id/client_old_password"
+        tools:context=".JournalView">
+
+
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:textColor="@color/hw_purple"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/copyrightText"
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAppearance="@android:style/TextAppearance.Small"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="SmallSp" />
+
+        <TextView
+            android:id="@+id/client_message"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/copyrightText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/mailboxButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:contentDescription="@string/send_mail"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/header"
+            app:layout_constraintStart_toStartOf="@+id/header"
+            app:layout_constraintTop_toTopOf="@+id/header"
+            app:srcCompat="@mipmap/mailbox" />
+
+        <ImageView
+            android:id="@+id/healthy_way_admin_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="@string/healthy_way_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/hw_app_purple_white_background_1024pt" />
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:background="@null"
+            android:contentDescription="@string/save_the_data"
+            android:textColor="@color/hw_blue"
+            android:textSize="12sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@+id/header"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Save" />
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="72dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="24dp"
+            android:background="@null"
+            android:contentDescription="cancel the data"
+            android:textColor="@color/hw_blue"
+            android:textSize="12sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/save_button"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Cancel" />
+
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="72dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:background="@null"
+            android:contentDescription="delete data"
+            android:textColor="@color/hw_blue"
+            android:textSize="12sp"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@+id/mailboxButton"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Delete" />
+
+
+        <TextView
+            android:id="@+id/label_weight"
+            android:layout_width="64dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:inputType="none"
+            android:text="Weight"
+            android:textAlignment="textStart"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/enter_weight"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/delete_button" />
+
+        <EditText
+            android:id="@+id/enter_weight"
+            android:layout_width="62dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/hw_input_green"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:text="999.9"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/label_weight"
+            app:layout_constraintTop_toBottomOf="@+id/delete_button" />
+
+        <ImageView
+            android:id="@+id/journal_calendar_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:foreground="@drawable/journal_calendar_icon"
+            android:textAlignment="center"
+            app:layout_constraintStart_toEndOf="@+id/enter_weight"
+            app:layout_constraintTop_toBottomOf="@+id/healthy_way_admin_icon" />
+
+        <EditText
+            android:id="@+id/enter_date"
+            android:layout_width="108dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:background="@color/hw_input_green"
+            android:ems="10"
+            android:inputType="date"
+            android:text="12/31/2019"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/enter_weight"
+            app:layout_constraintStart_toEndOf="@+id/journal_calendar_icon"
+            app:layout_constraintTop_toTopOf="@+id/enter_weight" />
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="343dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/copyrightText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/label_water"
+            android:layout_width="64dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:text="Water"
+            android:textAlignment="textStart"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_weight" />
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:buttonTint="@color/hw_input_green"
+            app:layout_constraintBottom_toBottomOf="@+id/label_water"
+            app:layout_constraintStart_toEndOf="@+id/checkBox1"
+            app:layout_constraintTop_toTopOf="@+id/label_water"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <CheckBox
+            android:id="@+id/checkBox1"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:buttonTint="@color/hw_input_green"
+            app:layout_constraintBottom_toBottomOf="@+id/label_water"
+            app:layout_constraintStart_toEndOf="@+id/label_water"
+            app:layout_constraintTop_toTopOf="@+id/label_water" />
+
+        <CheckBox
+            android:id="@+id/checkBox3"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:buttonTint="@color/hw_input_green"
+            app:layout_constraintBottom_toBottomOf="@+id/label_water"
+            app:layout_constraintStart_toEndOf="@+id/checkBox2"
+            app:layout_constraintTop_toTopOf="@+id/label_water"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <CheckBox
+            android:id="@+id/checkBox4"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:buttonTint="@color/hw_input_green"
+            app:layout_constraintBottom_toBottomOf="@+id/label_water"
+            app:layout_constraintStart_toEndOf="@+id/checkBox3"
+            app:layout_constraintTop_toTopOf="@+id/label_water"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <CheckBox
+            android:id="@+id/checkBox5"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:buttonTint="@color/hw_input_green"
+            app:layout_constraintBottom_toBottomOf="@+id/label_water"
+            app:layout_constraintStart_toEndOf="@+id/checkBox4"
+            app:layout_constraintTop_toTopOf="@+id/label_water"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <CheckBox
+            android:id="@+id/checkBox6"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:buttonTint="@color/hw_input_green"
+            app:layout_constraintBottom_toBottomOf="@+id/label_water"
+            app:layout_constraintStart_toEndOf="@+id/checkBox5"
+            app:layout_constraintTop_toTopOf="@+id/label_water" />
+
+        <CheckBox
+            android:id="@+id/checkBox7"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:button="@color/hw_input_green"
+            app:layout_constraintBottom_toBottomOf="@+id/label_water"
+            app:layout_constraintStart_toEndOf="@+id/checkBox6"
+            app:layout_constraintTop_toTopOf="@+id/label_water"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <CheckBox
+            android:id="@+id/checkBox8"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:button="@color/hw_input_green"
+            app:layout_constraintBottom_toBottomOf="@+id/label_water"
+            app:layout_constraintStart_toEndOf="@+id/checkBox7"
+            app:layout_constraintTop_toTopOf="@+id/label_water"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/label_supplement"
+            android:layout_width="96dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:text="Supplement"
+            android:textAlignment="textStart"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_water" />
+
+        <CheckBox
+            android:id="@+id/checkBoxSupplement2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:button="@color/hw_input_green"
+            app:layout_constraintBottom_toBottomOf="@+id/label_supplement"
+            app:layout_constraintStart_toEndOf="@+id/checkBoxSupplement1"
+            app:layout_constraintTop_toTopOf="@+id/label_supplement"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <CheckBox
+            android:id="@+id/checkBoxSupplement1"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:buttonTint="@color/hw_input_green"
+            app:layout_constraintBottom_toBottomOf="@+id/label_supplement"
+            app:layout_constraintStart_toEndOf="@+id/label_supplement"
+            app:layout_constraintTop_toTopOf="@+id/label_supplement" />
+
+        <CheckBox
+            android:id="@+id/checkBoxSupplement3"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:buttonTint="@color/hw_input_green"
+            app:layout_constraintBottom_toBottomOf="@+id/label_water"
+            app:layout_constraintStart_toEndOf="@+id/checkBoxSupplement2"
+            app:layout_constraintTop_toTopOf="@+id/label_supplement"
+            app:layout_constraintVertical_bias="0.0" />
+
+
+        <TextView
+            android:id="@+id/label_exercise"
+            android:layout_width="76dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:text="Exercise"
+            android:textAlignment="textStart"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/checkBoxSupplement3"
+            app:layout_constraintStart_toEndOf="@+id/checkBoxSupplement3"
+            app:layout_constraintTop_toTopOf="@+id/checkBoxSupplement3" />
+
+        <CheckBox
+            android:id="@+id/checkBoxExercise"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:buttonTint="@color/hw_input_green"
+            app:layout_constraintBottom_toBottomOf="@+id/label_exercise"
+            app:layout_constraintStart_toEndOf="@+id/label_exercise"
+            app:layout_constraintTop_toTopOf="@+id/label_exercise" />
+
+        <TextView
+            android:id="@+id/label_what_happened_today"
+            android:layout_width="wrap_content"
+            android:layout_height="12dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="What happened today?"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toTopOf="@+id/enter_what_happened_today"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxSupplement3" />
+
+        <EditText
+            android:id="@+id/enter_what_happened_today"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="-8dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:overScrollMode="ifContentScrolls"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical"
+            android:textAlignment="textStart"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_what_happened_today" />
+
+        <LinearLayout
+            android:id="@+id/meal_selections"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:clickable="true"
+            android:clipChildren="true"
+            android:clipToPadding="true"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/enter_what_happened_today">
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/hw_white"
+                android:capitalize="words"
+                android:text="Breakfast"
+                android:textAppearance="@style/HWTabText" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/hw_white"
+                android:capitalize="words"
+                android:text="Snack"
+                android:textAppearance="@style/HWTabText" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/hw_white"
+                android:capitalize="words"
+                android:text="Lunch"
+                android:textAppearance="@style/HWTabText" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/hw_white"
+                android:capitalize="words"
+                android:text="Snack"
+                android:textAppearance="@style/HWTabText" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/hw_white"
+                android:capitalize="words"
+                android:text="Dinner"
+                android:textAppearance="@style/HWTabText" />
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/hw_white"
+                android:capitalize="words"
+                android:text="Snack"
+                android:textAppearance="@style/HWTabText" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
