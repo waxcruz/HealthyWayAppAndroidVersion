@@ -15,7 +15,7 @@
         android:gravity="center_vertical"
         app:layout_constraintBottom_toTopOf="@android:id/message"
         app:layout_constraintTop_toBottomOf="@id/client_old_password"
-        tools:context=".JournalView">
+        tools:context=".TabJournal">
 
 
         <TextView
@@ -57,31 +57,34 @@
 
         <ImageButton
             android:id="@+id/mailboxButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_marginStart="8dp"
             android:contentDescription="@string/send_mail"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/header"
             app:layout_constraintStart_toStartOf="@+id/header"
             app:layout_constraintTop_toTopOf="@+id/header"
             app:srcCompat="@mipmap/mailbox" />
 
         <ImageView
             android:id="@+id/healthy_way_admin_icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:contentDescription="@string/healthy_way_icon"
             app:layout_constraintBottom_toBottomOf="@+id/header"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/hw_app_purple_white_background_1024pt" />
 
         <Button
             android:id="@+id/save_button"
-            android:layout_width="64dp"
-            android:layout_height="48dp"
+            android:layout_width="44dp"
+            android:layout_height="32dp"
             android:layout_marginEnd="8dp"
             android:background="@null"
             android:contentDescription="@string/save_the_data"
@@ -94,11 +97,11 @@
 
         <Button
             android:id="@+id/cancel_button"
-            android:layout_width="72dp"
-            android:layout_height="48dp"
+            android:layout_width="48dp"
+            android:layout_height="32dp"
             android:layout_marginEnd="24dp"
             android:background="@null"
-            android:contentDescription="cancel the data"
+            android:contentDescription="@string/cancel_the_data"
             android:textColor="@color/hw_blue"
             android:textSize="12sp"
             android:visibility="visible"
@@ -108,11 +111,11 @@
 
         <Button
             android:id="@+id/delete_button"
-            android:layout_width="72dp"
-            android:layout_height="48dp"
+            android:layout_width="48dp"
+            android:layout_height="32dp"
             android:layout_marginStart="8dp"
             android:background="@null"
-            android:contentDescription="delete data"
+            android:contentDescription="@string/delete_data"
             android:textColor="@color/hw_blue"
             android:textSize="12sp"
             android:visibility="visible"
@@ -123,19 +126,19 @@
 
         <TextView
             android:id="@+id/label_weight"
-            android:layout_width="64dp"
+            android:layout_width="48dp"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:ems="10"
             android:inputType="none"
-            android:text="Weight"
+            android:text="@string/weight"
             android:textAlignment="textStart"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/enter_weight"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/delete_button" />
+            app:layout_constraintTop_toBottomOf="@id/delete_button" />
 
         <EditText
             android:id="@+id/enter_weight"
@@ -149,18 +152,18 @@
             android:text="999.9"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/label_weight"
-            app:layout_constraintTop_toBottomOf="@+id/delete_button" />
+            app:layout_constraintTop_toBottomOf="@+id/delete_button"
+            android:autofillHints="" />
 
         <ImageView
             android:id="@+id/journal_calendar_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
             android:foreground="@drawable/journal_calendar_icon"
             android:textAlignment="center"
             app:layout_constraintStart_toEndOf="@+id/enter_weight"
-            app:layout_constraintTop_toBottomOf="@+id/healthy_way_admin_icon" />
+            app:layout_constraintTop_toBottomOf="@+id/delete_button" />
 
         <EditText
             android:id="@+id/enter_date"
@@ -190,7 +193,7 @@
 
         <TextView
             android:id="@+id/label_water"
-            android:layout_width="64dp"
+            android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
@@ -288,7 +291,7 @@
 
         <TextView
             android:id="@+id/label_supplement"
-            android:layout_width="96dp"
+            android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
@@ -356,11 +359,11 @@
         <TextView
             android:id="@+id/label_what_happened_today"
             android:layout_width="wrap_content"
-            android:layout_height="12dp"
+            android:layout_height="14dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:text="What happened today?"
-            android:textSize="10sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/enter_what_happened_today"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -369,10 +372,7 @@
         <EditText
             android:id="@+id/enter_what_happened_today"
             android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="-8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_height="24dp"
             android:background="@color/hw_input_green"
             android:ems="10"
             android:gravity="start|top"
@@ -390,7 +390,7 @@
         <LinearLayout
             android:id="@+id/meal_selections"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:clickable="true"
@@ -407,7 +407,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/hw_white"
-                android:capitalize="words"
                 android:text="Breakfast"
                 android:textAppearance="@style/HWTabText" />
 
@@ -417,8 +416,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/hw_white"
-                android:capitalize="words"
-                android:text="Snack"
+                 android:text="Snack"
                 android:textAppearance="@style/HWTabText" />
 
             <Button
@@ -427,7 +425,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/hw_white"
-                android:capitalize="words"
                 android:text="Lunch"
                 android:textAppearance="@style/HWTabText" />
 
@@ -437,7 +434,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/hw_white"
-                android:capitalize="words"
                 android:text="Snack"
                 android:textAppearance="@style/HWTabText" />
 
@@ -447,7 +443,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/hw_white"
-                android:capitalize="words"
                 android:text="Dinner"
                 android:textAppearance="@style/HWTabText" />
 
@@ -457,7 +452,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/hw_white"
-                android:capitalize="words"
                 android:text="Snack"
                 android:textAppearance="@style/HWTabText" />
         </LinearLayout>
@@ -465,9 +459,7 @@
         <EditText
             android:id="@+id/enter_meal_description"
             android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_height="24dp"
             android:background="@color/hw_input_green"
             android:ems="10"
             android:gravity="start|top"
@@ -493,12 +485,12 @@
         <TextView
             android:id="@+id/label_meal_description"
             android:layout_width="0dp"
-            android:layout_height="12dp"
+            android:layout_height="14dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:text="Meal description"
             android:textAlignment="center"
-            android:textSize="10sp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/meal_selections" />
@@ -626,7 +618,7 @@
             android:layout_marginEnd="8dp"
             android:text="Meal Comments"
             android:textAlignment="center"
-            android:textSize="10sp"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/enter_fruit_consumption" />
@@ -635,8 +627,6 @@
             android:id="@+id/enter_meal_comments"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:background="@color/hw_input_green"
             android:ems="10"
             android:gravity="start|top"
@@ -646,202 +636,56 @@
             android:scrollbars="vertical"
             android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_meal_comments" />
 
-        <androidx.gridlayout.widget.GridLayout
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:columnCount="6"
-            app:layout_constraintBottom_toTopOf="@+id/copyrightText"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/client_message"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/enter_meal_comments"
-            app:layout_constraintVertical_bias="1.0">
-
-
-            <TextView
-                android:layout_width="50sp"
-                android:text="@string/single_space"
-                android:textAlignment="viewEnd"
-                app:layout_column="0"
-                app:layout_row="0" />
+            app:layout_constraintVertical_bias="0.0">
 
             <TextView
-                android:layout_width="50sp"
+                android:id="@+id/stats_header"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Daily"
-                android:textAlignment="viewEnd"
-                app:layout_column="0"
-                app:layout_row="1" />
+                android:fontFamily="monospace"
+                android:text="@string/stats_header"
+                android:textAlignment="center" />
 
             <TextView
-                android:layout_width="50sp"
-                android:text="Today"
-                android:textAlignment="viewEnd"
-                app:layout_column="0"
-                app:layout_row="2" />
+                android:id="@+id/stats_limit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="@string/stats_limits"
+                android:textAlignment="center" />
 
             <TextView
-                android:layout_width="50sp"
-                android:text="Total"
-                android:textAlignment="viewEnd"
-                app:layout_column="0"
-                app:layout_row="3" />
-
-
-            <TextView
-                android:layout_width="50sp"
-                android:text="@string/grid_header_protein"
-                android:textAlignment="viewEnd"
-                app:layout_column="1"
-                app:layout_row="0" />
+                android:id="@+id/stats_today"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="@string/stats_today"
+                android:textAlignment="center" />
 
             <TextView
-                android:layout_width="50dp"
-                android:text="@string/label_decimal_zero"
-                android:textAlignment="center"
-                app:layout_column="1"
-                app:layout_row="1" />
+                android:id="@+id/stats_total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="@string/stats_total"
+                android:textAlignment="center" />
+        </LinearLayout>
 
-            <TextView
-                android:layout_width="50dp"
-                android:text="@string/label_decimal_zero"
-                android:textAlignment="center"
-                app:layout_column="1"
-                app:layout_row="2" />
-
-            <TextView
-                android:layout_width="50dp"
-                android:text="@string/label_decimal_zero"
-                android:textAlignment="center"
-                app:layout_column="1"
-                app:layout_row="3" />
-
-
-            <TextView
-                android:layout_width="50sp"
-                android:text="@string/grid_header_fat"
-                android:textAlignment="center"
-                app:layout_column="2"
-                app:layout_row="0" />
-
-            <TextView
-                android:layout_width="50dp"
-                android:text="@string/label_decimal_zero"
-                android:textAlignment="center"
-                app:layout_column="2"
-                app:layout_row="1" />
-
-            <TextView
-                android:layout_width="50dp"
-                android:text="@string/label_decimal_zero"
-                android:textAlignment="center"
-                app:layout_column="2"
-                app:layout_row="2" />
-
-            <TextView
-                android:layout_width="50dp"
-                android:text="@string/label_decimal_zero"
-                android:textAlignment="center"
-                app:layout_column="2"
-                app:layout_row="3" />
-
-
-            <TextView
-                android:layout_width="50sp"
-                android:text="@string/grid_header_starch"
-                android:textAlignment="center"
-                app:layout_column="3"
-                app:layout_row="0" />
-
-            <TextView
-
-                android:layout_width="50dp"
-                android:text="@string/label_decimal_zero"
-                android:textAlignment="center"
-                app:layout_column="3"
-                app:layout_row="1" />
-
-            <TextView
-                android:layout_width="50dp"
-                android:text="@string/label_decimal_zero"
-                android:textAlignment="center"
-                app:layout_column="3"
-                app:layout_row="2" />
-
-            <TextView
-                android:layout_width="50dp"
-                android:text="@string/label_decimal_zero"
-                android:textAlignment="center"
-                app:layout_column="3"
-                app:layout_row="3" />
-
-
-            <TextView
-                android:layout_width="50sp"
-                android:text="@string/grid_header_fruits"
-                android:textAlignment="center"
-                app:layout_column="4"
-                app:layout_row="0" />
-
-            <TextView
-                android:layout_width="50dp"
-                android:text="@string/label_decimal_zero"
-                android:textAlignment="center"
-                app:layout_column="4"
-                app:layout_row="1" />
-
-            <TextView
-                android:layout_width="50dp"
-                android:text="@string/label_decimal_zero"
-                android:textAlignment="center"
-                app:layout_column="4"
-                app:layout_row="2" />
-
-            <TextView
-                android:layout_width="50dp"
-                android:text="@string/label_decimal_zero"
-                android:textAlignment="center"
-                app:layout_column="4"
-                app:layout_row="3" />
-
-
-            <TextView
-                android:layout_width="60sp"
-                android:text="@string/grid_header_veggies"
-                android:textAlignment="center"
-                app:layout_column="5"
-                app:layout_row="0" />
-
-            <TextView
-                android:layout_width="60dp"
-                android:text="@string/label_decimal_zero"
-                android:textAlignment="center"
-                app:layout_column="5"
-                app:layout_row="1" />
-
-            <TextView
-                android:layout_width="60dp"
-                android:text="@string/label_decimal_zero"
-                android:textAlignment="center"
-                app:layout_column="5"
-                app:layout_row="2" />
-
-            <TextView
-                android:layout_width="60dp"
-                android:text="@string/label_decimal_zero"
-                android:textAlignment="center"
-                app:layout_column="5"
-                app:layout_row="3" />
-
-
-        </androidx.gridlayout.widget.GridLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
