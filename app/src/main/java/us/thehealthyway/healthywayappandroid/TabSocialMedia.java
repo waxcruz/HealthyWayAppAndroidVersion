@@ -1,6 +1,7 @@
 package us.thehealthyway.healthywayappandroid;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -9,7 +10,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 
+
+import static us.thehealthyway.healthywayappandroid.AppData.DEBUG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +25,18 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class TabSocialMedia extends Fragment {
+    private static final String TAG = "HW.TabSocialMedia";
+    
+    // UI references
+    private ImageButton link_to_healthy_way;
+    private ImageButton link_facebook;
+    private ImageButton link_instagram;
+    private ImageButton link_you_tube;
+    private ImageButton link_pinterest;
+
+    // link
+    private String show_link;
+    
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -66,7 +83,55 @@ public class TabSocialMedia extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_social_media_tab, container, false);
+        View view;
+        view = inflater.inflate(R.layout.fragment_social_media_tab, container, false);
+         link_to_healthy_way = (ImageButton) view.findViewById(R.id.link_to_healthy_way);
+         link_to_healthy_way.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 show_link = HW_Links.healthyWay;
+                 display_social_media(show_link);
+             }
+         });
+         link_facebook = (ImageButton) view.findViewById(R.id.link_facebook);
+         link_facebook.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 show_link = HW_Links.facebook;
+                 display_social_media(show_link);
+             }
+         });
+         link_instagram = (ImageButton) view.findViewById(R.id.link_instagram);
+         link_instagram.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 show_link = HW_Links.instagram;
+                 display_social_media(show_link);
+             }
+         });
+         link_you_tube = (ImageButton) view.findViewById(R.id.link_you_tube);
+         link_you_tube.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 show_link = HW_Links.youTube;
+                 display_social_media(show_link);
+             }
+         });
+         link_pinterest = (ImageButton) view.findViewById(R.id.link_pinterest);
+         link_pinterest.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 show_link = HW_Links.pinterest;
+                 display_social_media(show_link);
+             }
+         });
+        
+        
+        
+        
+        
+        
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -107,4 +172,10 @@ public class TabSocialMedia extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(HW_Enumerations.TabNames tabIndex, HW_Enumerations.SubTabNames subTabIndex);
     }
+
+    void display_social_media(String url) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
+    }
+
 }
