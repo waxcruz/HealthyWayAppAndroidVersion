@@ -22,7 +22,7 @@ public class AppData extends Application {
 
     //  package name
     public static String packageName;
-    private static final String TAG = "HW.AppData";
+    public static final String TAG = "HW.AppData";
     //  enables (true) or disables (false) debug logcat messages
     public static final boolean DEBUG = true;  // reset to "false" for submission
 

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TabDailyTotals">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".TabDailyTotals">
+
+        <ImageView
+            android:id="@+id/hw_icon_header"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/hw_header_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/hw_app_purple_white_background_512pt" />
+
+        <Button
+            android:id="@+id/my_account_button"
+            android:layout_width="96dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:contentDescription="@string/my_string_admin_account"
+            android:background="@null"
+            android:text="@string/my_account"
+            android:textColor="@color/hw_blue"
+            android:textSize="12sp"
+            android:typeface="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/limitsHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/daily_totals_header"
+            android:ems="10"
+            android:inputType="none"
+            android:text="@string/daily_totals"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hw_icon_header" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="207dp" />
+
+        <EditText
+            android:id="@+id/limit_protein_label"
+            android:layout_width="96dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:background="@null"
+            android:ems="10"
+            android:inputType="none"
+            android:text="@string/protein"
+            android:textAlignment="viewEnd"
+            app:layout_constraintBaseline_toBaselineOf="@+id/limit_protein"
+            app:layout_constraintEnd_toStartOf="@+id/limit_protein"
+            app:layout_constraintHorizontal_bias="0.533"
+            app:layout_constraintStart_toStartOf="parent"
+            android:importantForAutofill="no" />
+
+
+        <EditText
+            android:id="@+id/limit_protein"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="24dp"
+            android:background="@android:color/holo_green_light"
+            android:contentDescription="@string/enter_daily_protein_limit"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:textAlignment="viewEnd"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/limitsHeader"
+            tools:text="8.0" />
+
+        <EditText
+            android:id="@+id/limit_fat_label"
+            android:layout_width="96dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:background="@null"
+            android:ems="10"
+            android:inputType="none"
+            android:text="@string/fat"
+            android:textAlignment="viewEnd"
+            app:layout_constraintBaseline_toBaselineOf="@+id/limit_fat"
+            app:layout_constraintEnd_toStartOf="@+id/limit_fat"
+            app:layout_constraintHorizontal_bias="0.533"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <EditText
+            android:id="@+id/limit_fat"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/enter_daily_fat_limit"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:text="8.0"
+            android:textAlignment="viewEnd"
+            android:background="@android:color/holo_green_light"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/limit_protein" />
+
+
+        <EditText
+            android:id="@+id/limit_starch_label"
+            android:layout_width="96dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:background="@null"
+            android:ems="10"
+            android:inputType="none"
+            android:text="@string/grid_header_starch"
+            android:textAlignment="viewEnd"
+            app:layout_constraintBaseline_toBaselineOf="@+id/limit_starch"
+            app:layout_constraintEnd_toStartOf="@+id/limit_starch"
+            app:layout_constraintHorizontal_bias="0.533"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <EditText
+            android:id="@+id/limit_starch"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/enter_daily_starch_limit"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:text="@string/_8_0"
+            android:textAlignment="viewEnd"
+            android:background="@android:color/holo_green_light"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/limit_fat" />
+
+
+        <EditText
+            android:id="@+id/limit_fruits_label"
+            android:layout_width="96dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:background="@null"
+            android:ems="10"
+            android:inputType="none"
+            android:text="@string/grid_header_fruits"
+            android:textAlignment="viewEnd"
+            app:layout_constraintBaseline_toBaselineOf="@+id/limit_fruits"
+            app:layout_constraintEnd_toStartOf="@+id/limit_fruits"
+            app:layout_constraintHorizontal_bias="0.533"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <EditText
+            android:id="@+id/limit_fruits"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/holo_green_light"
+            android:contentDescription="@string/enter_daily_fruits_limit"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:text="@string/_8_0"
+            android:textAlignment="viewEnd"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/limit_starch" />
+
+        <EditText
+            android:id="@+id/limit_vegies_label"
+            android:layout_width="96dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@null"
+            android:ems="10"
+            android:inputType="none"
+            android:text="@string/veggies"
+            android:textAlignment="viewEnd"
+            app:layout_constraintEnd_toStartOf="@+id/limit_fruits"
+            app:layout_constraintTop_toBottomOf="@+id/limit_fruits_label" />
+
+        <EditText
+            android:id="@+id/limit_veggies_min_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:ems="10"
+            android:inputType="none"
+            android:text="@string/minimum_3_cups"
+            app:layout_constraintBaseline_toBaselineOf="@+id/limit_vegies_label"
+            app:layout_constraintStart_toStartOf="@+id/limit_fruits" />
+
+        <EditText
+            android:id="@+id/limit_spacer_dash"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="64dp"
+            android:background="@null"
+            android:ems="10"
+            android:inputType="none"
+            android:text="@string/dash"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toStartOf="@+id/limit_protein_high"
+            app:layout_constraintStart_toEndOf="@+id/limit_protein"
+            app:layout_constraintTop_toBottomOf="@+id/limitsHeader"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/limit_protein_high"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="32dp"
+            android:background="@android:color/holo_green_light"
+            android:contentDescription="@string/enter_high_protein_limit"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:text="@string/_12_0"
+            android:textAlignment="viewStart"
+            app:layout_constraintBaseline_toBaselineOf="@+id/limit_protein"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/limit_spacer_dash"
+            android:importantForAutofill="no" />
+
+        <TextView
+            android:id="@+id/daily_totals_copyright"
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:text="@string/copyright_2019_the_healthy_way"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/daily_totals_message"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/messages"
+            app:layout_constraintBottom_toTopOf="@+id/daily_totals_copyright"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/limit_vegies_label" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

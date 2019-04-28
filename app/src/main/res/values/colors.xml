@@ -4,7 +4,9 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="hw_green">#588436</color>
+    <color name="hw_input_green">#D4FB79</color>
     <color name="hw_purple">#4a2353</color>
     <color name="hw_blue">#90F2F9</color>
-    <color name="hw_white">#ffffff</color>
+    <color name="hw_white">#FFFFFF</color>
+    <color name="hw_default_text">#0072ff</color>
 </resources>

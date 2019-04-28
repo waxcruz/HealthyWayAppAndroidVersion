@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/journal_selection"
+        android:icon="@drawable/icon_hw_journal"
+        android:title="@string/journal_string"
+        android:titleCondensed="@string/condensed_tab_journal"
+        app:showAsAction="withText" />
+    <item
+        android:id="@+id/weight_chart_selection"
+        android:icon="@drawable/icon_hw_weight_graph"
+        android:title="@string/weight_graph_string"
+        android:titleCondensed="@string/condensed_tab_weight"
+        app:showAsAction="withText" />
+    <item
+        android:id="@+id/social_media_selection"
+        android:icon="@drawable/icon_hw_social_media"
+        android:title="@string/social_media_string"
+        android:titleCondensed="@string/condensed_tab_social"
+        app:showAsAction="withText" />
+    <item
+        android:id="@+id/grocery_list_selection"
+        android:icon="@drawable/icon_hw_grocery_list"
+        android:title="@string/grocery_list_string"
+        android:titleCondensed="@string/condensed_tab_shop"
+        app:showAsAction="withText" />
+    <item
+        android:id="@+id/daily_totals_selection"
+        android:icon="@drawable/icon_hw_daily_totals"
+        android:title="@string/daily_totals_string"
+        android:titleCondensed="@string/condensed_tab_daily"
+        app:showAsAction="withText" />
+</menu>

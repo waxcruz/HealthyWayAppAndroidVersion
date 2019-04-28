@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame_social_media"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TabSocialMedia">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".TabSocialMedia">
+
+        <TextView
+            android:id="@+id/social_links_header"
+            android:layout_width="0dp"
+            android:layout_height="69dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="Encouragement"
+            android:fontFamily="sans-serif-medium"
+            android:text="Follow us online for daily support and inspiration!"
+            android:textAlignment="center"
+            android:textAppearance="@android:style/TextAppearance.Large"
+            android:textSize="24sp"
+            android:typeface="sans"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/link_to_healthy_way"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toTopOf="@id/link_facebook"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/social_links_header"
+            app:srcCompat="@drawable/hw_app_purple_white_background_512pt" />
+
+        <ImageButton
+            android:id="@+id/link_facebook"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toTopOf="@id/link_instagram"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/link_to_healthy_way"
+            app:srcCompat="@drawable/flogo_rgb_hex_512" />
+
+        <ImageButton
+            android:id="@+id/link_instagram"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toTopOf="@id/link_you_tube"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/link_facebook"
+            app:srcCompat="@drawable/instagram_glyph_fill" />
+
+        <ImageButton
+            android:id="@+id/link_you_tube"
+            android:layout_width="128dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toTopOf="@id/link_pinterest"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/link_instagram"
+            app:srcCompat="@drawable/yt_logo_rgb_light" />
+
+        <ImageButton
+            android:id="@+id/link_pinterest"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/link_you_tube"
+            app:layout_constraintVertical_bias="0.131"
+            app:srcCompat="@drawable/pinterest_badge_rbg" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Copyright @ 2019 The Healthy Way"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

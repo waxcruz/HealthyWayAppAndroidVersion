@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Healthy Way App</string>
+    <string name="app_full_name">Healthy Way App</string>
 
     <string name="title_activity_login">Log in to Healthy Way Admin</string>
     <!-- Strings related to login -->
@@ -138,6 +138,62 @@
     <string name="clear_search_text">clear search text</string>
     <string name="the_healthy_way_icon">The Healthy Way Icon</string>
     <string name="healthy_way_grocery_list">Healthy Way Grocery List</string>
+    <string name="app_name">Bottom Navigation</string>
+    <string name="title_journal">Journal</string>
+    <string name="title_weight">Weight Chart</string>
+    <string name="title_social">Social Media</string>
+    <string name="title_grocery">Grocery List</string>
+    <string name="title_daily">Daily Totals</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="journal_string">Journal</string>
+    <string name="weight_graph_string">Weight Graph</string>
+    <string name="social_media_string">Social Media</string>
+    <string name="grocery_list_string">Grocery List</string>
+    <string name="daily_totals_string">Daily Totals</string>
+    <string name="my_string_admin_account">my @string/admin_account</string>
+    <string name="my_account">My Account</string>
+    <string name="daily_totals_header">daily totals header</string>
+    <string name="daily_totals">Daily Totals</string>
+    <string name="_12_0">12.0</string>
+    <string name="enter_high_protein_limit">enter high protein limit</string>
+    <string name="messages">messages</string>
+    <string name="dash">-</string>
+    <string name="enter_daily_protein_limit">enter daily protein limit</string>
+    <string name="minimum_3_cups">(minimum 3 cups)</string>
+    <string name="hw_header_icon">header</string>
+    <string name="veggies">Veggies</string>
+    <string name="copyright_2019_the_healthy_way">Copyright @ 2019 The Healthy Way</string>
+    <string name="protein">Protein</string>
+    <string name="fat">Fat</string>
+    <string name="enter_daily_fat_limit">enter daily fat limit</string>
+    <string name="enter_daily_starch_limit">enter daily starch limit</string>
+    <string name="enter_daily_fruits_limit">enter daily fruits limit</string>
+    <string name="_8_0">8.0</string>
+    <string name="grid_header_fruits">Fruits</string>
+    <string name="grid_header_starch">Starch</string>
+    <string name="save_the_data">save the data</string>
+    <string name="enter_default_zero">0.0</string>
+    <string name="single_space" />
+    <string name="grid_header_protein">Protein</string>
+    <string name="label_decimal_zero">0.0</string>
+    <string name="grid_header_fat">Fat</string>
+    <string name="grid_header_veggies">Veggies</string>
+    <string name="cancel_the_data">cancel the data</string>
+    <string name="delete_data">delete data</string>
+    <string name="weight">Weight</string>
+    <!-- Condensed tab titles -->
+    <string name="condensed_tab_journal">Log</string>
+    <string name="condensed_tab_weight">Weight</string>
+    <string name="condensed_tab_social">Social</string>
+    <string name="condensed_tab_shop">List</string>
+    <string name="condensed_tab_daily">Daily</string>
+    <string name="stats_header">______Pr__Fat_St__Fr__Veg</string>
+    <string name="stats_limits">Daily 0.0 0.0 0.0 0.0 0.0</string>
+    <string name="stats_today" >Today 0.0 0.0 0.0 0.0 0.0</string>
+    <string name="stats_total" >Total 0.0 0.0 0.0 0.0 0.0</string>
 
 
 </resources>
