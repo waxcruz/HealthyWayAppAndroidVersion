@@ -56,60 +56,63 @@ public class Model {
     // Keys and content
     private String firebaseDateKey;
     private Map<String, Object> settingsInFirebase;
-    public Map<String, Object> getSettingsInFirebase() {
-        return settingsInFirebase;
-    }
-    public void setSettingsInFirebase(Map<String, Object> settingsInFirebase) {
-        this.settingsInFirebase = settingsInFirebase;
-    }
+        public Map<String, Object> getSettingsInFirebase() {
+            return settingsInFirebase;
+        }
+        public void setSettingsInFirebase(Map<String, Object> settingsInFirebase) {
+            this.settingsInFirebase = settingsInFirebase;
+        }
     private Map<String, Object> journalInFirebase;
-    public Map<String, Object> getJournalInFirebase() {
-        return journalInFirebase;
-    }
-    public void setJournalInFirebase(Map<String, Object> journalInFirebase) {
-        this.journalInFirebase = journalInFirebase;
-    }
+        public Map<String, Object> getJournalInFirebase() {
+            return journalInFirebase;
+        }
+        public void setJournalInFirebase(Map<String, Object> journalInFirebase) {
+            this.journalInFirebase = journalInFirebase;
+        }
     private Map<String, Object> mealContentsInFirebase;
-    public Map<String, Object> getMealContentsInFirebase() {
+        public Map<String, Object> getMealContentsInFirebase() {
         return mealContentsInFirebase;
     }
-    public void setMealContentsInFirebase(Map<String, Object> mealContentsInFirebase) {
-        this.mealContentsInFirebase = mealContentsInFirebase;
-    }
+        public void setMealContentsInFirebase(Map<String, Object> mealContentsInFirebase) {
+            this.mealContentsInFirebase = mealContentsInFirebase;
+        }
     private Map<String, Object> emailsInFirebase;
-    public Map<String, Object> getEmailsInFirebase() { return emailsInFirebase;};
-    public void setEmailsInFirebase(Map<String, Object> emailsInFirebase) {
-        this.emailsInFirebase = emailsInFirebase;
-        Set<String> keys = emailsInFirebase.keySet();
-        String [] keyValues = keys.toArray(new String[keys.size()]);
-        setEmailsList(keyValues);
-    }
-    private Map<String, Object> clientNode;
-    public Map<String, Object> getClientNode() {
-        return clientNode;
-    }
-    public void setClientNode(Map<String, Object> clientNode) {
-        this.clientNode = clientNode;
-    }
-    private String clientErrorMessage;
-    public String getClientErrorMessage() {
-        return clientErrorMessage;
-    }
-    public void setClientErrorMessage(String clientErrorMessage) {
-        this.clientErrorMessage = clientErrorMessage;
-    }
+        public Map<String, Object> getEmailsInFirebase() { return emailsInFirebase;};
+        public void setEmailsInFirebase(Map<String, Object> emailsInFirebase) {
+            this.emailsInFirebase = emailsInFirebase;
+            Set<String> keys = emailsInFirebase.keySet();
+            String [] keyValues = keys.toArray(new String[keys.size()]);
+            setEmailsList(keyValues);
+        }
+    // master data here and firebase is the backup
+    private Map<String, Object> signedinUserDataNode;
+        public Map<String, Object> getSignedinUserDataNode() {
+
+            return signedinUserDataNode;
+        }
+        public void setSignedinUserDataNode(Map<String, Object> signedinUserDataNode) {
+            this.signedinUserDataNode = signedinUserDataNode;
+        }
+    private String signedinUserErrorMessage;
+        public String getSignedinUserErrorMessage() {
+            return signedinUserErrorMessage;
+        }
+        public void setSignedinUserErrorMessage(String signedinUserErrorMessage) {
+            this.signedinUserErrorMessage = signedinUserErrorMessage;
+        }
     private String emailsList[];
-    public String[] getEmailsList() {
-        return emailsList;
-    }
-    public void setEmailsList(String[] emailsList) {
-        this.emailsList = emailsList;
-    }
+        public String[] getEmailsList() {
+            return emailsList;
+        }
+        public void setEmailsList(String[] emailsList) {
+            this.emailsList = emailsList;
+        }
     // Firebase attributes
     private boolean isAdminSignedIn;
     private String signedInUID;
     private String signedInEmail;
     private String signedInError;
+
 
     /*
         Singleton model
@@ -138,40 +141,6 @@ public class Model {
         signedInEmail = null;
         signedInError = null;
         successHandler.successful();
-
-//        // Initialize Firebase Auth
-//        mFirebaseAuth = FirebaseAuth.getInstance();
-//        mFirebaseUser = mFirebaseAuth.getCurrentUser();
-//        mFirebaseAuth.signOut();
-//        mFirebaseUser = mFirebaseAuth.getCurrentUser();
-//        if (mFirebaseUser == null) {
-//            // Not signed in, launch the Sign In activity
-//            mFirebaseAuth.signInWithEmailAndPassword("wmyronw@yahoo.com", "waxwax")
-//                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<AuthResult> task) {
-//                            Log.d(TAG, "onComplete");
-//                            if (task.isSuccessful()) {
-//                                Log.d(TAG,"Successful login");
-//                                isAdminSignedIn = true;
-//                                signedInUID = mFirebaseAuth.getCurrentUser().getUid();
-//                                signedInEmail = mFirebaseAuth.getCurrentUser().getEmail();
-//                                healthywaysc = FirebaseDatabase.getInstance();
-//                                ref = healthywaysc.getReference();
-//                                successHandler.successful();
-//                            } else {
-//                                Log.d(TAG, "Failed to sign in. Error is " + task.getException());
-//                                signedInError = task.getException().toString();
-//                                isAdminSignedIn = false;
-//                                failureHandler.failure("Failed to sign in. Error: " + task.getException().getLocalizedMessage());
-//                            }
-//                        }
-//                    });
-//        } else {
-//            signedInUID = mFirebaseUser.getUid();
-//            signedInEmail = mFirebaseUser.getEmail();
-//            isAdminSignedIn = true;
-//        }
 
 
     }
@@ -348,86 +317,40 @@ public class Model {
             }
         });
     }
+    // Used by Healthy Way Admin app
 
-    void getNodeOfClient(final String email, final FailureHandler errorHandler, final SuccessHandler handler) {
-        // emails-->users-->userData
-        if (clientNode != null) {
-            clientNode.clear();
+    void getNodeOfClient(final FailureHandler errorHandler, final SuccessHandler handler) {
+        // userData
+        if (signedinUserDataNode != null) {
+            signedinUserDataNode.clear();
         }
-        clientErrorMessage = "";
-        // find the email in node emails
-        String firebaseMail = Helpers.makeFirebaseEmailKey(email);
-        DatabaseReference emailsRef = ref.child(KeysForFirebase.NODE_EMAILS).child(firebaseMail);
-        ValueEventListener clientEvent = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                try {
-                    final Map<String, Object> nodeEmailsValue = (Map<String, Object>) dataSnapshot.getValue();
-                    if (nodeEmailsValue == null) {
-                        clientErrorMessage = "No Client found with that email address";
-                        errorHandler.failure(clientErrorMessage);
-                        return;
-                    }
-                    final String  clientUID =  (String) nodeEmailsValue.get("uid");
-                    if (clientUID == null) {
-                        clientErrorMessage = "No Client found with that email address";
-                        errorHandler.failure(clientErrorMessage);
-                        return;
-                    }
-                    // use emails secondary key, UID, to verify client email is cross linked to users UID
-                    DatabaseReference userRef = ref.child(KeysForFirebase.NODE_USERS).child(clientUID);
-                    ValueEventListener userEvent = new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            Map<String, Object> nodeUsersValue = (Map<String, Object>) dataSnapshot.getValue();
-                            if (nodeEmailsValue == null) {
-                                clientErrorMessage = "Encountered error searching for client UID";
-                                errorHandler.failure(clientErrorMessage);
-                                return;
-                            }
-                            String checkEmail = (String) nodeUsersValue.get("email");
-                            if (checkEmail.equals(email)) {
-                                // retrieve the client data
-                                DatabaseReference userDataRef = ref.child(KeysForFirebase.NODE_USERDATA).child(clientUID);
-                                ValueEventListener userDataEvent = new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        clientNode = (Map<String, Object>) dataSnapshot.getValue();
-                                        clientErrorMessage = "";
-                                        handler.successful();
-                                        return;
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                                        clientNode = null;
-                                        clientErrorMessage = "Encountered error searching for client data";
-                                        errorHandler.failure(clientErrorMessage);
-                                        return;
-                                    }
-                                };
-                                userDataRef.addListenerForSingleValueEvent(userDataEvent);
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    };
-                    userRef.addListenerForSingleValueEvent(userEvent);
-
-                } catch (NullPointerException e) {
-                    errorHandler.failure("Null exception condition in getNodeOfClient. Error condition: " + e.getLocalizedMessage());
+        signedinUserErrorMessage = "";
+        // find user data
+         try {
+            // retrieve the client data
+            DatabaseReference userDataRef = ref.child(KeysForFirebase.NODE_USERDATA).child(signedInUID);
+            ValueEventListener userDataEvent = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    signedinUserDataNode = (Map<String, Object>) dataSnapshot.getValue();
+                    signedinUserErrorMessage = "";
+                    handler.successful();
+                    return;
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    signedinUserDataNode = null;
+                    signedinUserErrorMessage = "Encountered error searching for client data";
+                    errorHandler.failure(signedinUserErrorMessage);
+                    return;
+                }
+            };
+            userDataRef.addListenerForSingleValueEvent(userDataEvent);
 
-            }
-        };
-        emailsRef.addListenerForSingleValueEvent(clientEvent);
+        } catch (NullPointerException e) {
+            errorHandler.failure("Null exception condition in getNodeOfClient. Error condition: " + e.getLocalizedMessage());
+        }
     }
 
 
@@ -499,7 +422,67 @@ public class Model {
     }
 
 
+    // write client data to userData
+    void setNodeUserData(Map<String, Object> node, final FailureHandler errorHandler,
+                         final SuccessHandler handler) {
+        DatabaseReference userDataRef = ref.child(KeysForFirebase.NODE_USERDATA).child(signedInUID);
+        try {
+            userDataRef.setValue(node)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        signedinUserDataNode = node;
+                        signedinUserErrorMessage = "";
+                        handler.successful();
+                    }
+                })
+                .addOnCanceledListener(new OnCanceledListener() {
+                    @Override
+                    public void onCanceled() {
+                        errorHandler.failure("Failure to update client settings");
+                    }
+                });
+        } catch (Exception e) {
 
+        }
+
+     }
+
+    // read userData node of client
+    void getNodeUserData(final FailureHandler errorHandler,
+                         final SuccessHandler handler) {
+        if (signedinUserDataNode.size() == 0) {
+            DatabaseReference userDataRef = ref.child(KeysForFirebase.NODE_USERDATA).child(signedInUID);
+            // find user data
+            try {
+                // retrieve the client data
+                ValueEventListener userDataEvent = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        signedinUserDataNode = (Map<String, Object>) dataSnapshot.getValue();
+                        signedinUserErrorMessage = "";
+                        handler.successful();
+                        return;
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        signedinUserDataNode = null;
+                        signedinUserErrorMessage = "Encountered error searching for client data";
+                        errorHandler.failure(signedinUserErrorMessage);
+                        return;
+                    }
+                };
+                userDataRef.addListenerForSingleValueEvent(userDataEvent);
+
+            } catch (NullPointerException e) {
+                errorHandler.failure("Null exception condition in getNodeOfClient. Error condition: " + e.getLocalizedMessage());
+            }
+
+        } else {
+            handler.successful();
+        }
+    }
 
     String getSignedInUID() {
         return signedInUID;
@@ -518,37 +501,6 @@ public class Model {
 
     String getSignedInError() {
         return signedInError;
-    }
-    // list methods
-
-    Map<String, Object> getNodeEmails(final FailureHandler failureHandler, final SuccessHandler successHandler) {
-        DatabaseReference emailsNode = ref.child("emails");
-        ValueEventListener emailsListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                try {
-                    setEmailsInFirebase((Map<String, Object>) dataSnapshot.getValue());
-                    successHandler.successful();
-                } catch (NullPointerException e) {
-                    failureHandler.failure("Null exception condition in createAuthUserNode. Error condition: " + e.getLocalizedMessage());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                failureHandler.failure("Database error reading emails node with message: " + databaseError.toString());
-            }
-
-        };
-        emailsNode.addListenerForSingleValueEvent(emailsListener);
-
-        return null;
-    }
-
-    public String [] getFullListOfClientEmails() {
-        Set<String> keys = emailsInFirebase.keySet();
-        String [] keyValues = keys.toArray(new String[keys.size()]);
-        return keyValues;
     }
 
     // create copyright string

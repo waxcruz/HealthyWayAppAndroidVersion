@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,18 +26,46 @@
             app:srcCompat="@drawable/hw_app_purple_white_background_512pt" />
 
         <Button
+            android:id="@+id/save_button"
+            android:layout_width="44dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/hw_white"
+            android:contentDescription="@string/save_the_data"
+            android:text="SAVE"
+            android:textColor="@color/hw_blue"
+            android:textSize="12sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="48dp"
+            android:layout_height="32dp"
+            android:background="@color/hw_white"
+            android:contentDescription="@string/cancel_the_data"
+            android:text="@string/cancel"
+            android:textColor="@color/hw_blue"
+            android:textSize="12sp"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <Button
             android:id="@+id/my_account_button"
             android:layout_width="96dp"
             android:layout_height="32dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/hw_white"
             android:contentDescription="@string/my_string_admin_account"
-            android:background="@null"
             android:text="@string/my_account"
             android:textColor="@color/hw_blue"
             android:textSize="12sp"
             android:typeface="normal"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/save_button"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -64,25 +93,26 @@
             android:orientation="vertical"
             app:layout_constraintGuide_begin="207dp" />
 
-        <EditText
+        <TextView
             android:id="@+id/limit_protein_label"
             android:layout_width="96dp"
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:background="@null"
             android:ems="10"
+            android:importantForAutofill="no"
             android:inputType="none"
             android:text="@string/protein"
             android:textAlignment="viewEnd"
-            app:layout_constraintBaseline_toBaselineOf="@+id/limit_protein"
-            app:layout_constraintEnd_toStartOf="@+id/limit_protein"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/limit_protein_low"
+            app:layout_constraintEnd_toStartOf="@+id/limit_protein_low"
             app:layout_constraintHorizontal_bias="0.533"
-            app:layout_constraintStart_toStartOf="parent"
-            android:importantForAutofill="no" />
+            app:layout_constraintStart_toStartOf="parent" />
 
 
         <EditText
-            android:id="@+id/limit_protein"
+            android:id="@+id/limit_protein_low"
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:layout_marginTop="24dp"
@@ -95,7 +125,7 @@
             app:layout_constraintTop_toBottomOf="@+id/limitsHeader"
             tools:text="8.0" />
 
-        <EditText
+        <TextView
             android:id="@+id/limit_fat_label"
             android:layout_width="96dp"
             android:layout_height="40dp"
@@ -105,6 +135,7 @@
             android:inputType="none"
             android:text="@string/fat"
             android:textAlignment="viewEnd"
+            android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@+id/limit_fat"
             app:layout_constraintEnd_toStartOf="@+id/limit_fat"
             app:layout_constraintHorizontal_bias="0.533"
@@ -123,10 +154,10 @@
             android:textAlignment="viewEnd"
             android:background="@android:color/holo_green_light"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/limit_protein" />
+            app:layout_constraintTop_toBottomOf="@+id/limit_protein_low" />
 
 
-        <EditText
+        <TextView
             android:id="@+id/limit_starch_label"
             android:layout_width="96dp"
             android:layout_height="40dp"
@@ -136,6 +167,7 @@
             android:inputType="none"
             android:text="@string/grid_header_starch"
             android:textAlignment="viewEnd"
+            android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@+id/limit_starch"
             app:layout_constraintEnd_toStartOf="@+id/limit_starch"
             app:layout_constraintHorizontal_bias="0.533"
@@ -157,7 +189,7 @@
             app:layout_constraintTop_toBottomOf="@+id/limit_fat" />
 
 
-        <EditText
+        <TextView
             android:id="@+id/limit_fruits_label"
             android:layout_width="96dp"
             android:layout_height="40dp"
@@ -167,6 +199,8 @@
             android:inputType="none"
             android:text="@string/grid_header_fruits"
             android:textAlignment="viewEnd"
+            android:textSize="14sp"
+            android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@+id/limit_fruits"
             app:layout_constraintEnd_toStartOf="@+id/limit_fruits"
             app:layout_constraintHorizontal_bias="0.533"
@@ -187,7 +221,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/limit_starch" />
 
-        <EditText
+        <TextView
             android:id="@+id/limit_vegies_label"
             android:layout_width="96dp"
             android:layout_height="40dp"
@@ -198,10 +232,11 @@
             android:inputType="none"
             android:text="@string/veggies"
             android:textAlignment="viewEnd"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/limit_fruits"
             app:layout_constraintTop_toBottomOf="@+id/limit_fruits_label" />
 
-        <EditText
+        <TextView
             android:id="@+id/limit_veggies_min_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -212,20 +247,23 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/limit_vegies_label"
             app:layout_constraintStart_toStartOf="@+id/limit_fruits" />
 
-        <EditText
+        <TextView
             android:id="@+id/limit_spacer_dash"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginTop="64dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:background="@null"
             android:ems="10"
+            android:importantForAutofill="no"
             android:inputType="none"
             android:text="@string/dash"
             android:textAlignment="center"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/limit_protein_high"
-            app:layout_constraintStart_toEndOf="@+id/limit_protein"
-            app:layout_constraintTop_toBottomOf="@+id/limitsHeader"
-            android:importantForAutofill="no" />
+            app:layout_constraintStart_toEndOf="@+id/limit_protein_low"
+            app:layout_constraintTop_toTopOf="@+id/limit_protein_high" />
 
         <EditText
             android:id="@+id/limit_protein_high"
@@ -238,7 +276,7 @@
             android:inputType="numberDecimal"
             android:text="@string/_12_0"
             android:textAlignment="viewStart"
-            app:layout_constraintBaseline_toBaselineOf="@+id/limit_protein"
+            app:layout_constraintBaseline_toBaselineOf="@+id/limit_protein_low"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/limit_spacer_dash"
             android:importantForAutofill="no" />

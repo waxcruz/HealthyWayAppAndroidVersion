@@ -45,6 +45,16 @@ public class Controller extends AppCompatActivity {
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         int routeToView = 0;
         Bundle routingInfo;
@@ -201,7 +211,6 @@ public class Controller extends AppCompatActivity {
             Log.d(TAG, "Email: " + model.getSignedInEmail());
         }
 
-        Map<String, Object> masterList = model.getNodeEmails((message)-> {failureGetEmailsNode(message); }, ()-> {successGetEmailsNode(); });
         switchActivities(HealthyWayAppActivities.LOGIN_ACTIVITY);
 
     }

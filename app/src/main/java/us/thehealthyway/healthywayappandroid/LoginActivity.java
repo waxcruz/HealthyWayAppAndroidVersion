@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         model = Model.getInstance();
         // Set up the login form.
         clientEmail = (EditText) findViewById(R.id.client_old_password);
-        clientEmail.setText("wmyronw@yahoo.com");
+        clientEmail.setText("waxcoder@yahoo.com");
         clientEmail.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
+
 //        clientEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 //            @Override
 //            public void onFocusChange(View v, boolean hasFocus) {
@@ -66,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         clientPassword = (EditText) findViewById(R.id.client_new_password);
-        clientPassword.setText("");
+        clientPassword.setText("client");
         clientPassword.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -153,7 +154,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void attemptLogin(){
-        model.loginUser(clientEmailKeyed, clientPasswordKeyed, (message)-> {loginFailure(message); }, ()-> {loginSuccess(); });
+        model.loginUser(clientEmailKeyed, clientPasswordKeyed, (message)-> {loginFailure(message); },
+                ()-> {loginSuccess(); });
     }
 
 
@@ -169,6 +171,17 @@ public class LoginActivity extends AppCompatActivity {
         if (DEBUG) {
             Log.d(TAG, "loginSuccess: " + clientEmailKeyed);
         }
+        model.getNodeOfClient((message)->{failedReadOfClientData(message);},
+                ()->{successfulReadOfClientData();}
+                );
+    }
+
+    void failedReadOfClientData(String message) {
+        this.message.setText("failedReadOfClientData: " + message);
+    }
+
+    void successfulReadOfClientData() {
+        this.message.setText("found client");
         // route to Master Tab Controller because client logged into app
         Intent intent = new Intent();
         intent.putExtra(HealthyWayAppActivities.HealthyWayViews.VIEW_LOGIN_ACTIVITY.getName(),
