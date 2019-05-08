@@ -167,6 +167,7 @@
 
         <EditText
             android:id="@+id/enter_date"
+            android:clickable="true"
             android:layout_width="108dp"
             android:layout_height="24dp"
             android:layout_marginStart="16dp"
@@ -179,17 +180,7 @@
             app:layout_constraintStart_toEndOf="@+id/journal_calendar_icon"
             app:layout_constraintTop_toTopOf="@+id/enter_weight" />
 
-        <CalendarView
-            android:id="@+id/calendarView"
-            android:layout_width="343dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/copyrightText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+
 
         <TextView
             android:id="@+id/label_water"
@@ -402,7 +393,7 @@
             app:layout_constraintTop_toBottomOf="@+id/enter_what_happened_today">
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/breakfast_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -411,7 +402,7 @@
                 android:textAppearance="@style/HWTabText" />
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/mornng_snack_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -420,7 +411,7 @@
                 android:textAppearance="@style/HWTabText" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/lunch_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -429,7 +420,7 @@
                 android:textAppearance="@style/HWTabText" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/afternoon_snack_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -438,7 +429,7 @@
                 android:textAppearance="@style/HWTabText" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/dinner_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -447,7 +438,7 @@
                 android:textAppearance="@style/HWTabText" />
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/evening_snack_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

@@ -17,4 +17,13 @@ public class HW_Enumerations {
         SUB_TAB_LEVEL_1,
         SUB_TAB_LEVEL_2
     }
+
+    enum Meals {
+        BREAKFAST,
+        MORNING_SNACK,
+        LUNCH,
+        AFTERNOON_SNACK,
+        DINNER,
+        EVENING_SNACK
+    }
 }

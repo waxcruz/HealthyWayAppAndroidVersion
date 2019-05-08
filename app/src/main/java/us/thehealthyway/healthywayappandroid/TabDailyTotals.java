@@ -252,6 +252,7 @@ public class TabDailyTotals extends Fragment {
 
 
         // connect editor actions
+
         limit_protein_low.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
