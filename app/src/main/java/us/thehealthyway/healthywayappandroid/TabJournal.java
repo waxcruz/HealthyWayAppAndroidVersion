@@ -995,6 +995,10 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
         mealContentsNodeContentsOnDate.put(mealKey(mealSelected), mealNode);
         mealContentsNode.put(firebase_enter_date, mealContentsNodeContentsOnDate);
         userDataNode.put(KeysForFirebase.NODE_MEAL_CONTENTS, mealContentsNode);
+        // delete all date events > 30
+        if (journalNode.size() > 30) {
+            userDataNode = pruneData(userDataNode);
+        }
         // ready to update Firebase
         model.setNodeUserData(userDataNode, (message) -> {
                     writeFailure(message);
@@ -1003,6 +1007,74 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
                     writeSuccess();
                 });
     }
+
+    Map<String, Object> pruneData(Map<String, Object> user) {
+        // only keep 30 days of data
+        Map<String, Object> journals = new HashMap<>();
+        Map<String, Object> meals = new HashMap<>();
+
+        if (user.containsKey(KeysForFirebase.NODE_JOURNAL)) {
+            journals = (Map<String, Object>) user.get(KeysForFirebase.NODE_JOURNAL);
+        }
+        if (user.containsKey(KeysForFirebase.NODE_MEAL_CONTENTS)) {
+            meals = (Map<String, Object>) user.get(KeysForFirebase.NODE_MEAL_CONTENTS);
+        }
+        // prune journal
+        if (journals.size() <= 30) {
+            return user;
+        }
+        Set<String> extractDates = journals.keySet();
+        ArrayList<String> fullListOfDates = new ArrayList<>(extractDates);
+        Collections.sort(fullListOfDates);
+        Collections.reverse(fullListOfDates);
+        ArrayList<String> keepList = new ArrayList<>();
+        ArrayList<String> deleteList = new ArrayList<>();
+        for (String logDate : fullListOfDates) {
+            if (keepList.size() <= 30) {
+                keepList.add(logDate);
+            } else {
+                deleteList.add(logDate);
+            }
+        }
+        for (String deleteDate : deleteList) {
+            journals.put(deleteDate, null);
+            // check for corresponding meal on date
+            if (meals.containsKey(deleteDate)) {
+                meals.put(deleteDate, null);
+            }
+        }
+        // prune meals
+        if (meals.size() > 30) {
+            extractDates = meals.keySet();
+            fullListOfDates = new ArrayList<>(extractDates);
+            Collections.sort(fullListOfDates);
+            Collections.reverse(fullListOfDates);
+            keepList.clear();
+            deleteList.clear();
+            for (String logDate : fullListOfDates) {
+                if (logDate == null) {
+                    continue;
+                }
+                if (keepList.size() <= 30) {
+                    keepList.add(logDate);
+                } else {
+                    deleteList.add(logDate);
+                }
+            }
+            for (String deleteDate : deleteList) {
+                meals.put(deleteDate, null);
+            }
+        }
+        user.put(KeysForFirebase.NODE_JOURNAL, journals);
+        user.put(KeysForFirebase.NODE_MEAL_CONTENTS, meals);
+        return user;
+    }
+
+
+
+
+
+
 
     String mealKey(HW_Enumerations.Meals meal) {
         switch (meal) {
@@ -1072,23 +1144,7 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
         // save html to local file
         String journalFileName = "journalAttachment2.html";
         String pathToJournalAttachment = saveHtmlFile(journalFileName, htmlBodyMail);
-        // try Journal attachment
-//
-//        File journalFile = getPublicDocumentsDirNewFile(journalFileName);
-//        pathToJournalAttachment = journalFile.getPath();
-//        try {
-//            FileInputStream checkAttachment = new FileInputStream(journalFile);
-//            int c;
-//            String attachment = "";
-//            while ((c = checkAttachment.read()) != -1) {
-//                attachment += Character.toString((char) c);
-//            }
-//            Log.i(TAG, "Attachment size:" + attachment.length());
-//            checkAttachment.close();
-//        } catch (Exception e) {
-//            Log.i(TAG, "sendEmailToStaff: ", e);
-// e       }
-
+ 
         // address email
         String[] TO = {model.getSignedInEmail()};
         String[] CC = {""};
