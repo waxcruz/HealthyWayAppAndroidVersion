@@ -1,17 +1,24 @@
 package us.thehealthyway.healthywayappandroid;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.media.JetPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -27,18 +34,22 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.security.Key;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import static us.thehealthyway.healthywayappandroid.Helpers.doubleFromObject;
-
+import static us.thehealthyway.healthywayappandroid.AppData.DEBUG;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -49,6 +60,11 @@ import static us.thehealthyway.healthywayappandroid.Helpers.doubleFromObject;
  */
 public class TabJournal extends Fragment implements View.OnClickListener, View.OnFocusChangeListener {
     private static final String TAG = "HW.TabJournal";
+
+    // Global variables for use between methods.
+    private double maxTotals[];     // limits
+    private double totals[];        // consumed
+
     // views
     ImageButton mailboxButton;
     Button save_button;
@@ -406,6 +422,8 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
                 Map<String, Object> mealContentsContentsOnDate = new HashMap<>();
                 if (mealContentsNode != null) {
                     mealContentsContentsOnDate = (Map<String, Object>) mealContentsNode.get(firebase_enter_date);
+                } else {
+                    mealContentsContentsOnDate = new HashMap<>();
                 }
                 switch (v.getId()) {
                     case R.id.breakfast_button:
@@ -1041,6 +1059,365 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
 
     void mailJournal() {
 
+        if (DEBUG) {
+            Log.d(TAG, "sendEmailToStaff: send client journal to staff");
+        }
+        // check permissions for attachments
+        if (!clearPermissionsForStorageAccess()) {
+            client_message.setText("Try again after you permit access to storage");
+            return;
+        };
+        // build journal
+        String htmlBodyMail = formatJournal(model.getSignedinUserDataNode(), true);
+        // save html to local file
+        String journalFileName = "journalAttachment2.html";
+        String pathToJournalAttachment = saveHtmlFile(journalFileName, htmlBodyMail);
+        // try Journal attachment
+//
+//        File journalFile = getPublicDocumentsDirNewFile(journalFileName);
+//        pathToJournalAttachment = journalFile.getPath();
+//        try {
+//            FileInputStream checkAttachment = new FileInputStream(journalFile);
+//            int c;
+//            String attachment = "";
+//            while ((c = checkAttachment.read()) != -1) {
+//                attachment += Character.toString((char) c);
+//            }
+//            Log.i(TAG, "Attachment size:" + attachment.length());
+//            checkAttachment.close();
+//        } catch (Exception e) {
+//            Log.i(TAG, "sendEmailToStaff: ", e);
+// e       }
+
+        // address email
+        String[] TO = {model.getSignedInEmail()};
+        String[] CC = {""};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/rfc822");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Journal");
+        // prep journal for attaching to email
+
+        emailIntent.putExtra(emailIntent.EXTRA_STREAM,
+                Uri.fromFile(new File(pathToJournalAttachment)));
+
+        emailIntent.putExtra(emailIntent.EXTRA_TEXT, "Open attachment to see the Healthy Way journal for you.");
+        emailIntent.addFlags(emailIntent.FLAG_ACTIVITY_NEW_TASK);
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            Log.i(TAG, "sendEmailToStaff: Done.");
+            client_message.setText("Journal sent attached to email");
+        } catch (android.content.ActivityNotFoundException ex) {
+            client_message.setText("There is no email client installed.");
+        }
+    }
+
+    private String saveHtmlFile(String journalFileName, String journal) {
+        String returnThePath = "";
+        if (isExternalStorageWritable()) {
+            Log.i(TAG, "saveHtmlFile: Storage ready");
+        } else
+        if (isExternalStorageReadable()) {
+            Log.i(TAG, "saveHtmlFile: Read only storage");
+        } else {
+            client_message.setText("No external storage available");
+        }
+
+        String root = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOCUMENTS).toString();
+        try {
+            FileOutputStream outputStream = new FileOutputStream(root+"/"+journalFileName);
+            outputStream.write(journal.getBytes());
+            outputStream.close();
+            returnThePath = root + "/" + journalFileName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return returnThePath;
+    }
+
+
+
+    private String formatJournal(Map<String, Object> node, boolean isEmail) {
+        // client Firebase node with 3 child nodes: Settings, Journal, and MealContents
+        if (node.size() == 0) {
+            return " ";
+        }
+        Map<String, Object> nodeSettings = (Map<String, Object>)node.get(KeysForFirebase.NODE_SETTINGS);
+        Map<String, Object>  nodeJournal = (Map<String, Object>) node.get(KeysForFirebase.NODE_JOURNAL);
+        Map<String, Object> nodeMealContents = (Map<String, Object>) node.get(KeysForFirebase.NODE_MEAL_CONTENTS);
+        String journalMockup = buildJournalHeader(isEmail);
+        if (nodeJournal == null) {
+            return " ";
+        }
+        if (nodeSettings == null) {
+            return " ";
+        }
+        // sort the journal dates for display in descending order
+        Set<String> datesOfConsumpation = nodeJournal.keySet();
+        ArrayList<String> sortedKeyDates = new ArrayList<String>(datesOfConsumpation);
+        Collections.sort(sortedKeyDates);
+        Collections.reverse(sortedKeyDates);
+        // display journaly details for date
+        if (nodeMealContents != null)
+        {
+            for (String mealdate : sortedKeyDates) {
+                totals = new double[5]; // clear totals for new date
+                journalMockup += buildJournalDailyTotalsRow(mealdate, nodeSettings);
+                Map<String, Object> meal = (Map<String, Object>)nodeMealContents.get(mealdate);
+                if (meal != null) {
+                    // extract details of consumption
+                    Map<String, Object> breakfast = (Map<String, Object>)meal.get(KeysForFirebase.BREAKFAST_MEAL_KEY);
+                    Map<String, Object> morningSnack = (Map<String, Object>)meal.get(KeysForFirebase.MORNING_SNACK_MEAL_KEY);
+                    Map<String, Object> lunch = (Map<String, Object>)meal.get(KeysForFirebase.LUNCH_MEAL_KEY);
+                    Map<String, Object> afternoonSnack = (Map<String, Object>)meal.get(KeysForFirebase.AFTERNOON_SNACK_MEAL_KEY);
+                    Map<String, Object> dinner = (Map<String, Object>)meal.get(KeysForFirebase.DINNER_MEAL_KEY);
+                    Map<String, Object> eveningSnack = (Map<String, Object>)meal.get(KeysForFirebase.EVENING_SNACK_MEAL_KEY);
+                    if (breakfast != null) {
+                        journalMockup += buildJournalMealRow(KeysForFirebase.BREAKFAST_MEAL_KEY, breakfast);
+                    }
+                    if (morningSnack != null) {
+                        journalMockup += buildJournalMealRow(KeysForFirebase.MORNING_SNACK_MEAL_KEY, morningSnack);
+                    }
+                    if (lunch != null) {
+                        journalMockup += buildJournalMealRow(KeysForFirebase.LUNCH_MEAL_KEY, lunch);
+                    }
+                    if (afternoonSnack != null) {
+                        journalMockup += buildJournalMealRow(KeysForFirebase.AFTERNOON_SNACK_MEAL_KEY, afternoonSnack);
+                    }
+                    if (dinner != null) {
+                        journalMockup += buildJournalMealRow(KeysForFirebase.DINNER_MEAL_KEY, dinner);
+                    }
+                    if (eveningSnack != null) {
+                        journalMockup += buildJournalMealRow(KeysForFirebase.EVENING_SNACK_MEAL_KEY, eveningSnack);
+                    }
+                }
+                journalMockup += buildJournalDateTotals();
+                journalMockup += buildJournalDateStats(mealdate, nodeJournal);
+                journalMockup += buildJournalDateComments(mealdate, nodeJournal);
+            }
+        }
+        journalMockup += buildJournalDateTrailer();
+        return journalMockup;
+    }
+
+    private String buildJournalHeader(boolean isEmail) {
+        // construct the heading for the client's journal
+        String message = "";
+        String template = ConstantsHTML.JOURNAL_DAY_HEADER;
+        if (isEmail) {
+            message = ConstantsHTML.LANDSCAPE;
+        }
+        template = template.replaceAll("HW_EMAIL_INSTRUCTION", message);
+        return template;
+    }
+
+    protected String buildJournalDailyTotalsRow(String displayDate,
+                                                Map<String, Object> node) {
+        // Java doesn't have a mechanism similar to Swift's inout so I use a global for maxTotals
+        maxTotals = new double[5]; // start fresh with no old information
+        String template = ConstantsHTML.JOURNAL_DAILY_TOTALS_ROW;
+        double amount = 0.0;
+        if (node == null) { // no daily limits
+            return " ";
+        }
+
+        template = template.replaceAll("HW_RECORDED_DATE",displayDate);
+        if (node.containsKey(KeysForFirebase.LIMIT_PROTEIN_LOW)) {
+            amount = ((Number) node.get(KeysForFirebase.LIMIT_PROTEIN_LOW)).doubleValue();
+        } else {
+            amount = 0.00;
+        }
+        maxTotals[0] = amount;
+        template = template.replaceAll("HW_DAILY_TOTAL_PROTEIN_VALUE", Double.toString(amount));
+        if (node.containsKey(KeysForFirebase.LIMIT_STARCH)) {
+            amount = ((Number) node.get(KeysForFirebase.LIMIT_STARCH)).doubleValue();
+        } else {
+            amount = 0.00;
+        }
+        maxTotals[1] = amount;
+        template = template.replaceAll("HW_DAILY_TOTAL_STARCH_VALUE", Double.toString(amount));
+        amount = 3.0; // Chel wanted a hard coded limit for veggies
+        maxTotals[2] = amount;
+        template = template.replaceAll("HW_DAILY_TOTAL_VEGGIES_VALUE", "3.0");
+        if (node.containsKey(KeysForFirebase.LIMIT_FRUIT)) {
+            amount = ((Number) node.get(KeysForFirebase.LIMIT_FRUIT)).doubleValue();
+        } else {
+            amount = 0.00;
+        }
+        maxTotals[3] = amount;
+        template = template.replaceAll("HW_DAILY_TOTAL_FRUIT_VALUE", Double.toString(amount));
+        if (node.containsKey(KeysForFirebase.LIMIT_FAT)) {
+            amount = ((Number) node.get(KeysForFirebase.LIMIT_FAT)).doubleValue();
+        } else {
+            amount = 0.00;
+        }
+        maxTotals[4] = amount;
+        template = template.replaceAll("HW_DAILY_TOTAL_FAT_VALUE", Double.toString(amount));
+        return template;
+    }
+
+    protected  String buildJournalMealRow(String name,
+                                          Map<String, Object> meal) {
+        // Java doesn't have a mechanism similar to Swift's inout so I use a global for totals
+        totals = new double[5];
+        String template = ConstantsHTML.JOURNAL_MEAL_ROW;
+        double amount = 0.0;
+
+        template = template.replaceAll("HW_MEAL_NAME", name);
+        if (meal.containsKey(KeysForFirebase.MEAL_DESCRIPTION)) {
+            template = template.replaceAll("HW_MEAL_CONTENTS_DESCRIPTION",
+                    (String) meal.get(KeysForFirebase.MEAL_DESCRIPTION));
+        } else {
+            template = template.replaceAll("HW_MEAL_CONTENTS_DESCRIPTION", " ");
+        }
+        if (meal.containsKey(KeysForFirebase.MEAL_PROTEIN_QUANTITY)) {
+            amount = ((Number) meal.get(KeysForFirebase.MEAL_PROTEIN_QUANTITY)).doubleValue();
+        } else {
+            amount = 0.00;
+        }
+        totals[0] = amount;
+        template = template.replaceAll("HW_MEAL_PROTEIN_COUNT", Double.toString(amount));
+        if (meal.containsKey(KeysForFirebase.MEAL_STARCH_QUANTITY)) {
+            amount = ((Number) meal.get(KeysForFirebase.MEAL_STARCH_QUANTITY)).doubleValue();
+        } else {
+            amount = 0.00;
+        }
+        totals[1] = amount;
+        template = template.replaceAll("HW_MEAL_STARCH_COUNT", Double.toString(amount));
+        if (meal.containsKey(KeysForFirebase.MEAL_VEGGIES_QUANTITY)) {
+            amount = ((Number) meal.get(KeysForFirebase.MEAL_VEGGIES_QUANTITY)).doubleValue();
+        } else {
+            amount = 0.00;
+        }
+        totals[2] = amount;
+        template = template.replaceAll("HW_MEAL_VEGGIES_COUNT", Double.toString(amount));
+        if (meal.containsKey(KeysForFirebase.MEAL_FRUIT_QUANTITY)) {
+            amount = ((Number) meal.get(KeysForFirebase.MEAL_FRUIT_QUANTITY)).doubleValue();
+        } else {
+            amount = 0.00;
+        }
+        totals[3] = amount;
+        template = template.replaceAll("HW_MEAL_FRUIT_COUNT", Double.toString(amount));
+        if (meal.containsKey(KeysForFirebase.MEAL_FAT_QUANTITY)) {
+            amount = ((Number) meal.get(KeysForFirebase.MEAL_FAT_QUANTITY)).doubleValue();
+        } else {
+            amount = 0.00;
+        }
+        totals[4] = amount;
+        template = template.replaceAll("HW_MEAL_FAT_COUNT", Double.toString(amount));
+        if (meal.containsKey(KeysForFirebase.MEAL_COMMENTS)) {
+            template = template.replaceAll("HW_MEAL_COMMENTS",
+                    (String) meal.get(KeysForFirebase.MEAL_COMMENTS));
+        } else {
+            template = template.replaceAll("HW_MEAL_COMMENTS",
+                    " ");
+        }
+        return template;
+    }
+
+    protected String buildJournalDateTotals() {
+        String  template = ConstantsHTML.JOURNAL_DATE_TOTALS;
+        // post consumption on date
+        template = template.replaceAll("HW_DATE_TOTAL_PROTEIN", Double.toString(totals[0]));
+        template = template.replaceAll("HW_DATE_TOTAL_STARCH", Double.toString(totals[1]));
+        if (maxTotals[1] < totals[1]) {
+            template = template.replaceAll("HW_TOTAL_STARCH_COLOR", "red");
+        } else {
+            template = template.replaceAll("HW_TOTAL_STARCH_COLOR", "black");
+        }
+        template = template.replaceAll("HW_DATE_TOTAL_VEGGIES", Double.toString(totals[2]));
+        template = template.replaceAll("HW_DATE_TOTAL_FRUIT", Double.toString(totals[3]));
+        if (maxTotals[3] < totals[3]) {
+            template = template.replaceAll("HW_TOTAL_FRUIT_COLOR", "red");
+        } else {
+            template = template.replaceAll("HW_TOTAL_FRUIT_COLOR", "black");
+        }
+        template = template.replaceAll("HW_DATE_TOTAL_FAT", Double.toString(totals[4]));
+        if (maxTotals[4] < totals[4]) {
+            template = template.replaceAll("HW_TOTAL_FAT_COLOR", "red");
+        } else {
+            template = template.replaceAll("HW_TOTAL_FAT_COLOR", "black");
+        }
+        return template;
+    }
+
+
+    protected String buildJournalDateStats(String date, Map<String, Object> node) {
+
+        int waterCheckCount = 0;
+        int supplementCheckCount = 0;
+        int exerciseCheckCount = 0;
+        String template = ConstantsHTML.JOURNAL_DATE_STATS;
+        Map<String, Object> journalDetails =  (Map<String, Object>) node.get(date);
+        if (journalDetails != null) {
+            if (journalDetails.get(KeysForFirebase.GLASSES_OF_WATER) != null) {
+                waterCheckCount = ((Number)(journalDetails.get(KeysForFirebase.GLASSES_OF_WATER))).intValue();
+            }
+            if (journalDetails.get(KeysForFirebase.SUPPLEMENTS) != null) {
+                supplementCheckCount = ((Number)(journalDetails.get(KeysForFirebase.SUPPLEMENTS))).intValue();
+            }
+            if (journalDetails.get(KeysForFirebase.EXERCISED) != null){
+                exerciseCheckCount = ((Number)(journalDetails.get(KeysForFirebase.EXERCISED))).intValue();
+            }
+        }
+        String checkMarks = TextUtils.join("",Collections.nCopies(waterCheckCount,"&#x2714; "));
+        template = template.replaceAll("HW_DATE_WATER_CHECKS", checkMarks);
+        checkMarks = TextUtils.join("",Collections.nCopies(supplementCheckCount,"&#x2714; "));
+        template = template.replaceAll("HW_DATE_SUPPLEMENTS_CHECKS ", checkMarks);
+        if (exerciseCheckCount > 0) {
+            template = template.replaceAll("HW_DATE_EXERCISE_CHECKS ", "&#x2714; ");
+        } else {
+            template = template.replaceAll("HW_DATE_EXERCISE_CHECKS ", " ");
+        }
+
+        return template;
+    }
+
+    protected  String buildJournalDateComments(String date,
+                                               Map<String, Object> node) {
+        String template = ConstantsHTML.JOURNAL_DATE_COMMENTS;
+        if (node.containsKey(date)) {
+            Map<String, Object> journalDetails = (Map<String, Object>)node.get(date);
+            if (journalDetails.containsKey(KeysForFirebase.NOTES)) {
+                template = template.replaceAll("HW_COMMENTS", (String) journalDetails.get(KeysForFirebase.NOTES));
+            } else {
+                template = template.replaceAll("HW_COMMENTS", " ");
+            }
+        } else {
+            template = template.replaceAll("HW_COMMENTS", " ");
+
+        }
+        Map<String, Object> journalDetails = (Map<String, Object>)node.get(date);
+        return template;
+    }
+
+
+    protected  String buildJournalDateTrailer() {
+        return ConstantsHTML.JOURNAL_DATE_TRAILER;
+    }
+
+
+
+    /* Checks if external storage is available for read and write */
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    /* Checks if external storage is available to at least read */
+    public boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+            return true;
+        }
+        return false;
     }
 
 
@@ -1263,6 +1640,38 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
 
     }
 
+    // permissions handling
+    private boolean clearPermissionsForStorageAccess(){
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Permission is not granted
+
+            // Should we show an explanation?
+            if (shouldShowRequestPermissionRationale(
+                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+            } else {
+                // No explanation needed; request the permission
+                requestPermissions(
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        HealthyWayAppActivities.PERMISSION_READ_STORAGE);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+            return false;
+        } else {
+            Log.i(TAG, "clearPermissionsForStorageAccess: permission granted");
+            return true;
+        }
+
+    }
 
     String formatTotals(double[] totals) {
         // String strDouble = String.format("%.2f", 1.23456)
