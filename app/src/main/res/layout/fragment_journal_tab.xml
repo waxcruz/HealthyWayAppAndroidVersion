@@ -61,7 +61,7 @@
             android:layout_height="32dp"
             android:layout_marginStart="8dp"
             android:contentDescription="@string/send_mail"
-            android:visibility="invisible"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="@+id/header"
             app:layout_constraintTop_toTopOf="@+id/header"
             app:srcCompat="@mipmap/mailbox" />
@@ -86,12 +86,13 @@
             android:layout_width="44dp"
             android:layout_height="32dp"
             android:layout_marginEnd="8dp"
-            android:background="@null"
+            android:background="@color/hw_white"
             android:contentDescription="@string/save_the_data"
+            android:text="@string/save"
             android:textColor="@color/hw_blue"
             android:textSize="12sp"
             android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="@+id/header"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Save" />
 
@@ -100,8 +101,9 @@
             android:layout_width="48dp"
             android:layout_height="32dp"
             android:layout_marginEnd="24dp"
-            android:background="@null"
+            android:background="@color/hw_white"
             android:contentDescription="@string/cancel_the_data"
+            android:text="@string/cancel_journal"
             android:textColor="@color/hw_blue"
             android:textSize="12sp"
             android:visibility="visible"
@@ -114,8 +116,9 @@
             android:layout_width="48dp"
             android:layout_height="32dp"
             android:layout_marginStart="8dp"
-            android:background="@null"
+            android:background="@color/hw_white"
             android:contentDescription="@string/delete_data"
+            android:text="@string/delete"
             android:textColor="@color/hw_blue"
             android:textSize="12sp"
             android:visibility="visible"
@@ -145,15 +148,16 @@
             android:layout_width="62dp"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
+            android:autofillHints=""
             android:background="@color/hw_input_green"
             android:ems="10"
+            android:imeOptions="actionDone"
             android:inputType="numberDecimal"
             android:singleLine="true"
             android:text="999.9"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/label_weight"
-            app:layout_constraintTop_toBottomOf="@+id/delete_button"
-            android:autofillHints="" />
+            app:layout_constraintTop_toBottomOf="@+id/delete_button" />
 
         <ImageView
             android:id="@+id/journal_calendar_icon"
@@ -165,9 +169,25 @@
             app:layout_constraintStart_toEndOf="@+id/enter_weight"
             app:layout_constraintTop_toBottomOf="@+id/delete_button" />
 
+<!--
         <EditText
             android:id="@+id/enter_date"
-            android:clickable="true"
+            android:layout_width="108dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:background="@color/hw_input_green"
+            android:clickable="false"
+            android:ems="10"
+            android:inputType="date"
+            android:text="12/31/2019"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/enter_weight"
+            app:layout_constraintStart_toEndOf="@+id/journal_calendar_icon"
+            app:layout_constraintTop_toTopOf="@+id/enter_weight" />
+-->
+
+        <Button
+            android:id="@+id/enter_date"
             android:layout_width="108dp"
             android:layout_height="24dp"
             android:layout_marginStart="16dp"
@@ -179,7 +199,6 @@
             app:layout_constraintBottom_toBottomOf="@+id/enter_weight"
             app:layout_constraintStart_toEndOf="@+id/journal_calendar_icon"
             app:layout_constraintTop_toTopOf="@+id/enter_weight" />
-
 
 
         <TextView
@@ -195,18 +214,18 @@
             app:layout_constraintTop_toBottomOf="@+id/label_weight" />
 
         <CheckBox
-            android:id="@+id/checkBox2"
+            android:id="@+id/checkBoxWater2"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
             android:buttonTint="@color/hw_input_green"
             app:layout_constraintBottom_toBottomOf="@+id/label_water"
-            app:layout_constraintStart_toEndOf="@+id/checkBox1"
+            app:layout_constraintStart_toEndOf="@+id/checkBoxWater1"
             app:layout_constraintTop_toTopOf="@+id/label_water"
             app:layout_constraintVertical_bias="1.0" />
 
         <CheckBox
-            android:id="@+id/checkBox1"
+            android:id="@+id/checkBoxWater1"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
@@ -216,67 +235,67 @@
             app:layout_constraintTop_toTopOf="@+id/label_water" />
 
         <CheckBox
-            android:id="@+id/checkBox3"
+            android:id="@+id/checkBoxWater3"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
             android:buttonTint="@color/hw_input_green"
             app:layout_constraintBottom_toBottomOf="@+id/label_water"
-            app:layout_constraintStart_toEndOf="@+id/checkBox2"
+            app:layout_constraintStart_toEndOf="@+id/checkBoxWater2"
             app:layout_constraintTop_toTopOf="@+id/label_water"
             app:layout_constraintVertical_bias="0.0" />
 
         <CheckBox
-            android:id="@+id/checkBox4"
+            android:id="@+id/checkBoxWater4"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
             android:buttonTint="@color/hw_input_green"
             app:layout_constraintBottom_toBottomOf="@+id/label_water"
-            app:layout_constraintStart_toEndOf="@+id/checkBox3"
+            app:layout_constraintStart_toEndOf="@+id/checkBoxWater3"
             app:layout_constraintTop_toTopOf="@+id/label_water"
             app:layout_constraintVertical_bias="0.0" />
 
         <CheckBox
-            android:id="@+id/checkBox5"
+            android:id="@+id/checkBoxWater5"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
             android:buttonTint="@color/hw_input_green"
             app:layout_constraintBottom_toBottomOf="@+id/label_water"
-            app:layout_constraintStart_toEndOf="@+id/checkBox4"
+            app:layout_constraintStart_toEndOf="@+id/checkBoxWater4"
             app:layout_constraintTop_toTopOf="@+id/label_water"
             app:layout_constraintVertical_bias="1.0" />
 
         <CheckBox
-            android:id="@+id/checkBox6"
+            android:id="@+id/checkBoxWater6"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
             android:buttonTint="@color/hw_input_green"
             app:layout_constraintBottom_toBottomOf="@+id/label_water"
-            app:layout_constraintStart_toEndOf="@+id/checkBox5"
+            app:layout_constraintStart_toEndOf="@+id/checkBoxWater5"
             app:layout_constraintTop_toTopOf="@+id/label_water" />
 
         <CheckBox
-            android:id="@+id/checkBox7"
+            android:id="@+id/checkBoxWater7"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
             android:buttonTint="@color/hw_input_green"
             app:layout_constraintBottom_toBottomOf="@+id/label_water"
-            app:layout_constraintStart_toEndOf="@+id/checkBox6"
+            app:layout_constraintStart_toEndOf="@+id/checkBoxWater6"
             app:layout_constraintTop_toTopOf="@+id/label_water"
             app:layout_constraintVertical_bias="0.0" />
 
         <CheckBox
-            android:id="@+id/checkBox8"
+            android:id="@+id/checkBoxWater8"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
             android:buttonTint="@color/hw_input_green"
             app:layout_constraintBottom_toBottomOf="@+id/label_water"
-            app:layout_constraintStart_toEndOf="@+id/checkBox7"
+            app:layout_constraintStart_toEndOf="@+id/checkBoxWater7"
             app:layout_constraintTop_toTopOf="@+id/label_water"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -367,7 +386,9 @@
             android:background="@color/hw_input_green"
             android:ems="10"
             android:gravity="start|top"
-            android:inputType="textMultiLine"
+            android:inputType="text|textImeMultiLine"
+            android:imeActionLabel="SAVE"
+            android:imeOptions="actionDone"
             android:overScrollMode="ifContentScrolls"
             android:scrollbarAlwaysDrawVerticalTrack="true"
             android:scrollbarStyle="insideInset"
@@ -397,9 +418,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/hw_white"
+                android:background="@color/hw_purple"
                 android:text="Breakfast"
-                android:textAppearance="@style/HWTabText" />
+                android:textAppearance="@style/HWTabText"
+                android:textColor="@color/hw_white" />
 
             <Button
                 android:id="@+id/mornng_snack_button"
@@ -407,8 +429,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/hw_white"
-                 android:text="Snack"
-                android:textAppearance="@style/HWTabText" />
+                android:text="Snack"
+                android:textAppearance="@style/HWTabText"
+                android:textColor="@color/hw_purple" />
 
             <Button
                 android:id="@+id/lunch_button"
@@ -454,7 +477,9 @@
             android:background="@color/hw_input_green"
             android:ems="10"
             android:gravity="start|top"
-            android:inputType="textMultiLine"
+            android:imeActionLabel="@string/save"
+            android:imeOptions="actionDone"
+            android:inputType="text|textImeMultiLine"
             android:overScrollMode="ifContentScrolls"
             android:scrollbarAlwaysDrawHorizontalTrack="true"
             android:scrollbarStyle="insideInset"
@@ -501,6 +526,7 @@
             android:layout_height="24dp"
             android:background="@color/hw_input_green"
             android:ems="10"
+            android:imeOptions="actionDone"
             android:inputType="numberDecimal"
             android:singleLine="true"
             android:text="9.9"
@@ -524,6 +550,7 @@
             android:layout_height="24dp"
             android:background="@color/hw_input_green"
             android:ems="10"
+            android:imeOptions="actionDone"
             android:inputType="numberDecimal"
             android:singleLine="true"
             android:text="9.9"
@@ -547,6 +574,7 @@
             android:layout_marginEnd="8dp"
             android:background="@color/hw_input_green"
             android:ems="10"
+            android:imeOptions="actionDone"
             android:inputType="numberDecimal"
             android:singleLine="true"
             android:text="9.9"
@@ -570,6 +598,7 @@
             android:layout_marginEnd="8dp"
             android:background="@color/hw_input_green"
             android:ems="10"
+            android:imeOptions="actionDone"
             android:inputType="numberDecimal"
             android:singleLine="true"
             android:text="9.9"
@@ -591,9 +620,9 @@
             android:id="@+id/enter_veggies_consumption"
             android:layout_width="48dp"
             android:layout_height="24dp"
-            android:layout_marginEnd="8dp"
             android:background="@color/hw_input_green"
             android:ems="10"
+            android:imeOptions="actionDone"
             android:inputType="numberDecimal"
             android:singleLine="true"
             android:text="9.9"
@@ -621,7 +650,9 @@
             android:background="@color/hw_input_green"
             android:ems="10"
             android:gravity="start|top"
-            android:inputType="textMultiLine"
+            android:inputType="text|textImeMultiLine"
+            android:imeOptions="actionDone"
+            android:imeActionLabel="@string/save"
             android:overScrollMode="ifContentScrolls"
             android:scrollbarStyle="insideInset"
             android:scrollbars="vertical"

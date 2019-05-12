@@ -12,11 +12,7 @@ public class BundleKeys {
         BundleKeyLimitFat("keyLimitFat"),
         BundleKeyLimitFruits("keyLimitFruits"),
         BundleKeyLimitVeggies("keyLimitVeggies"),
-        BundleKeyKeyingSettings("keyKeyingSettings")
-
-
-        ;
-        ;
+        BundleKeyKeyingSettings("keyKeyingSettings");
 
         private String stringName;
 

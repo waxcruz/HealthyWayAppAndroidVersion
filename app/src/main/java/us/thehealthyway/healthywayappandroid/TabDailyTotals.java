@@ -370,19 +370,19 @@ public class TabDailyTotals extends Fragment {
         userDataNode = model.getSignedinUserDataNode();
         if ((Map<String, Object>)userDataNode.get(KeysForFirebase.NODE_SETTINGS) == null) {
             settingsNode = new HashMap<String, Object>();
-            settingsNode.put(KeysForFirebase.LIMIT_PROTEIN_LOW, "0.0");
-            settingsNode.put(KeysForFirebase.LIMIT_PROTEIN_HIGH, "0.0");
-            settingsNode.put(KeysForFirebase.LIMIT_FAT, "0.0");
-            settingsNode.put(KeysForFirebase.LIMIT_FRUIT, "0.0");
-            settingsNode.put(KeysForFirebase.LIMIT_STARCH, "0.0");
+            settingsNode.put(KeysForFirebase.LIMIT_PROTEIN_LOW, 0.0);
+            settingsNode.put(KeysForFirebase.LIMIT_PROTEIN_HIGH, 0.0);
+            settingsNode.put(KeysForFirebase.LIMIT_FAT, 0.0);
+            settingsNode.put(KeysForFirebase.LIMIT_FRUIT, 0.0);
+            settingsNode.put(KeysForFirebase.LIMIT_STARCH, 0.0);
         } else {
             settingsNode = (Map<String, Object>)userDataNode.get(KeysForFirebase.NODE_SETTINGS);
         }
-        if (keyed_limit_protein_low != null) settingsNode.put(KeysForFirebase.LIMIT_PROTEIN_LOW, keyed_limit_protein_low);
-        if (keyed_limit_protein_high != null) settingsNode.put(KeysForFirebase.LIMIT_PROTEIN_HIGH, keyed_limit_protein_high);
-        if (keyed_limit_fat != null) settingsNode.put(KeysForFirebase.LIMIT_FAT, keyed_limit_fat);
-        if (keyed_limit_fruits != null) settingsNode.put(KeysForFirebase.LIMIT_FRUIT, keyed_limit_fruits);
-        if (keyed_limit_starch != null) settingsNode.put(KeysForFirebase.LIMIT_STARCH, keyed_limit_starch);
+        if (keyed_limit_protein_low != null) settingsNode.put(KeysForFirebase.LIMIT_PROTEIN_LOW, Double.valueOf(keyed_limit_protein_low));
+        if (keyed_limit_protein_high != null) settingsNode.put(KeysForFirebase.LIMIT_PROTEIN_HIGH, Double.valueOf(keyed_limit_protein_high));
+        if (keyed_limit_fat != null) settingsNode.put(KeysForFirebase.LIMIT_FAT, Double.valueOf(keyed_limit_fat));
+        if (keyed_limit_fruits != null) settingsNode.put(KeysForFirebase.LIMIT_FRUIT, Double.valueOf(keyed_limit_fruits));
+        if (keyed_limit_starch != null) settingsNode.put(KeysForFirebase.LIMIT_STARCH, Double.valueOf(keyed_limit_starch));
         userDataNode.put(KeysForFirebase.NODE_SETTINGS,settingsNode);
         model.setNodeUserData(userDataNode, (message)-> {writeFailure(message); },
                 ()-> {writeSuccess(); });

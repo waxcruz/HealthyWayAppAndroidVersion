@@ -119,6 +119,7 @@
             android:background="@android:color/holo_green_light"
             android:contentDescription="@string/enter_daily_protein_limit"
             android:ems="10"
+            android:imeOptions="actionDone"
             android:inputType="numberDecimal"
             android:textAlignment="viewEnd"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -147,12 +148,13 @@
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:layout_marginTop="16dp"
+            android:background="@android:color/holo_green_light"
             android:contentDescription="@string/enter_daily_fat_limit"
             android:ems="10"
+            android:imeOptions="actionDone"
             android:inputType="numberDecimal"
             android:text="8.0"
             android:textAlignment="viewEnd"
-            android:background="@android:color/holo_green_light"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/limit_protein_low" />
 
@@ -179,12 +181,13 @@
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:layout_marginTop="16dp"
+            android:background="@android:color/holo_green_light"
             android:contentDescription="@string/enter_daily_starch_limit"
             android:ems="10"
+            android:imeOptions="actionDone"
             android:inputType="numberDecimal"
             android:text="@string/_8_0"
             android:textAlignment="viewEnd"
-            android:background="@android:color/holo_green_light"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/limit_fat" />
 
@@ -215,6 +218,7 @@
             android:background="@android:color/holo_green_light"
             android:contentDescription="@string/enter_daily_fruits_limit"
             android:ems="10"
+            android:imeOptions="actionDone"
             android:inputType="numberDecimal"
             android:text="@string/_8_0"
             android:textAlignment="viewEnd"
@@ -273,13 +277,14 @@
             android:background="@android:color/holo_green_light"
             android:contentDescription="@string/enter_high_protein_limit"
             android:ems="10"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
             android:inputType="numberDecimal"
             android:text="@string/_12_0"
             android:textAlignment="viewStart"
             app:layout_constraintBaseline_toBaselineOf="@+id/limit_protein_low"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/limit_spacer_dash"
-            android:importantForAutofill="no" />
+            app:layout_constraintStart_toEndOf="@+id/limit_spacer_dash" />
 
         <TextView
             android:id="@+id/daily_totals_copyright"

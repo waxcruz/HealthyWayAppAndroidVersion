@@ -18,14 +18,32 @@ public class Helpers {
         return validEmail;
     }
 
-    public static  String showToday() {
+    public static String showToday() {
         String date = new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault()).format(new Date());
         return date;
     }
 
-    public static  String makeFirebaseDate(Date myDate) {
+    public static String makeFirebaseDate(Date myDate) {
         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(myDate);
         return date;
     }
 
+    public static Double doubleFromObject(Object o) {
+        Double d;
+        if (o instanceof Long) {
+            d = ((Long) o).doubleValue();
+        } else {
+            if (o instanceof Double) {
+                d = (Double) o;
+            } else {
+                if (o instanceof String) {
+                    d = Double.valueOf((String) o);
+                } else {
+                    d = 0.0;
+                }
+            }
+        }
+        return d;
+    }
 }
+

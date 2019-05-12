@@ -332,7 +332,7 @@ public class Model {
             ValueEventListener userDataEvent = new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    signedinUserDataNode = (Map<String, Object>) dataSnapshot.getValue();
+                    signedinUserDataNode = (Map<String, Object>)dataSnapshot.getValue();
                     signedinUserErrorMessage = "";
                     handler.successful();
                     return;

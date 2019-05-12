@@ -194,6 +194,9 @@
     <string name="stats_limits">Daily 0.0 0.0 0.0 0.0 0.0</string>
     <string name="stats_today" >Today 0.0 0.0 0.0 0.0 0.0</string>
     <string name="stats_total" >Total 0.0 0.0 0.0 0.0 0.0</string>
+    <string name="save">SAVE</string>
+    <string name="cancel_journal">CANCEL</string>
+    <string name="delete">DELETE</string>
 
 
 </resources>
