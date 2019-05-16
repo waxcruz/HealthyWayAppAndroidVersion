@@ -506,7 +506,7 @@ public class Model {
     // create copyright string
     static String makeCopyRight() {
         Calendar calendar = Calendar.getInstance();
-        return String.format("Copyright @ %s The Healthy Way", calendar.get(Calendar.YEAR));
+        return String.format("Copyright @ %s The Healthy Way of BUILD 1.4", calendar.get(Calendar.YEAR));
     }
 
 
