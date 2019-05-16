@@ -306,6 +306,9 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
             case R.id.enter_meal_description:
                 keyed_enter_meal_description = changedData;
                 break;
+            case R.id.enter_meal_comments:
+                keyed_enter_meal_comments = changedData;
+                break;
             case R.id.enter_fat_consumption:
                 keyed_enter_fat_consumption = changedData;
                 break;
@@ -421,34 +424,47 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
                 lastMealSelected = v.findViewById(v.getId());
                 Map<String, Object> mealContentsContentsOnDate = new HashMap<>();
                 if (mealContentsNode != null) {
-                    mealContentsContentsOnDate = (Map<String, Object>) mealContentsNode.get(firebase_enter_date);
-                } else {
-                    mealContentsContentsOnDate = new HashMap<>();
+                    if (mealContentsNode.containsKey(firebase_enter_date)) {
+                        mealContentsContentsOnDate = (Map<String, Object>) mealContentsNode.get(firebase_enter_date);
+                    }
                 }
+                mealNode = new HashMap<>();
                 switch (v.getId()) {
                     case R.id.breakfast_button:
                         mealSelected = HW_Enumerations.Meals.BREAKFAST;
-                        mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.BREAKFAST_MEAL_KEY);
+                        if (mealContentsContentsOnDate.containsKey(KeysForFirebase.BREAKFAST_MEAL_KEY)) {
+                            mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.BREAKFAST_MEAL_KEY);
+                        }
                         break;
                     case R.id.mornng_snack_button:
                         mealSelected = HW_Enumerations.Meals.MORNING_SNACK;
-                        mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.MORNING_SNACK_MEAL_KEY);
+                        if (mealContentsContentsOnDate.containsKey(KeysForFirebase.BREAKFAST_MEAL_KEY)) {
+                            mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.MORNING_SNACK_MEAL_KEY);
+                        }
                         break;
                     case R.id.lunch_button:
                         mealSelected = HW_Enumerations.Meals.LUNCH;
-                        mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.LUNCH_MEAL_KEY);
+                        if (mealContentsContentsOnDate.containsKey(KeysForFirebase.LUNCH_MEAL_KEY)){
+                            mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.LUNCH_MEAL_KEY);
+                        }
                         break;
                     case R.id.afternoon_snack_button:
                         mealSelected = HW_Enumerations.Meals.AFTERNOON_SNACK;
-                        mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.AFTERNOON_SNACK_MEAL_KEY);
+                        if (mealContentsContentsOnDate.containsKey(KeysForFirebase.AFTERNOON_SNACK_MEAL_KEY)){
+                            mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.AFTERNOON_SNACK_MEAL_KEY);
+                        }
                         break;
                     case R.id.dinner_button:
                         mealSelected = HW_Enumerations.Meals.DINNER;
-                        mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.DINNER_MEAL_KEY);
+                        if (mealContentsContentsOnDate.containsKey(KeysForFirebase.DINNER_MEAL_KEY)){
+                            mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.DINNER_MEAL_KEY);
+                        }
                         break;
                     case R.id.evening_snack_button:
                         mealSelected = HW_Enumerations.Meals.EVENING_SNACK;
-                        mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.EVENING_SNACK_MEAL_KEY);
+                        if (mealContentsContentsOnDate.containsKey(KeysForFirebase.EVENING_SNACK_MEAL_KEY)){
+                            mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.EVENING_SNACK_MEAL_KEY);
+                        }
                         break;
                     default:
                         Log.d(TAG, "onClick: bad OnClick view ID");
@@ -841,12 +857,12 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
             // now check for individual fields
             if (journalNode.get(firebase_enter_date) == null) {
                 enter_weight.setText("0.0");
-                enter_date.setText(Helpers.showToday());
+                enter_date.setText(Helpers.makeDisplayDate(selectedDateFromDatePicker));
                 enter_what_happened_today.setText("");
                 showCheckboxes(0, 0, 0);
             } else {
                 Map<String, Object> journalNodeContentsOnDate = (Map<String, Object>) journalNode.get(firebase_enter_date);
-                enter_date.setText(firebase_enter_date);
+                enter_date.setText(Helpers.makeDisplayDate(selectedDateFromDatePicker));
                 if (journalNodeContentsOnDate.get(KeysForFirebase.WEIGHED) == null) {
                     enter_weight.setText("0.0");
                 } else {
@@ -1126,6 +1142,7 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
         postModelDataToView();
+        displayTotals();
         hideDataEntryButtons();
     }
 
@@ -1144,7 +1161,7 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
         // save html to local file
         String journalFileName = "journalAttachment2.html";
         String pathToJournalAttachment = saveHtmlFile(journalFileName, htmlBodyMail);
- 
+
         // address email
         String[] TO = {model.getSignedInEmail()};
         String[] CC = {""};

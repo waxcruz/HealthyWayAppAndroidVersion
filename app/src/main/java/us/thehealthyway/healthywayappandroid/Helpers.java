@@ -28,6 +28,11 @@ public class Helpers {
         return date;
     }
 
+    public static String makeDisplayDate(Date myDate) {
+        String date = new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault()).format(myDate);
+        return date;
+    }
+
     public static Double doubleFromObject(Object o) {
         Double d;
         if (o instanceof Long) {

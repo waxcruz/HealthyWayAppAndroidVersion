@@ -30,13 +30,13 @@
 
         <activity android:name=".ForgottenPassword"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>/>
+            android:screenOrientation="portrait"/>
         <activity android:name=".CreateNewAccount"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>/>
+            android:screenOrientation="portrait"/>
         <activity android:name=".ChangePassword"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>/>
+            android:screenOrientation="portrait"/>
         <activity android:name=".LoginActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
