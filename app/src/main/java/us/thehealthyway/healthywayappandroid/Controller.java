@@ -61,104 +61,104 @@ public class Controller extends AppCompatActivity {
         switch (requestCode) {
             case HealthyWayAppActivities.CONTROLLER:
                 if (resultCode == Activity.RESULT_OK) {
-                    Log.d(TAG, "Returned from Controller, somethings wrong!" );
+                    if (DEBUG) Log.d(TAG, "Returned from Controller, somethings wrong!" );
                     routingInfo = data.getExtras();
                     if (routingInfo != null) {
                         routeToView = (int) routingInfo.get(HealthyWayAppActivities.HealthyWayViews.VIEW_CONTROLLER.getName());
                     }
                 } else {
-                    Log.d(TAG, "Returned from Controller with cancel");
+                    if (DEBUG) Log.d(TAG, "Returned from Controller with cancel");
                     routeToView = HealthyWayAppActivities.CONTROLLER;
                 }
 
                 break;
             case HealthyWayAppActivities.CHANGE_PASSWORD_ACTIVITY:
                 if (resultCode == Activity.RESULT_OK) {
-                    Log.d(TAG, String.format("Returned from %s", HealthyWayAppActivities.HealthyWayViews.VIEW_CHANGE_PASSWORD_ACTIVITY.getName()));
+                    if (DEBUG) Log.d(TAG, String.format("Returned from %s", HealthyWayAppActivities.HealthyWayViews.VIEW_CHANGE_PASSWORD_ACTIVITY.getName()));
                     routingInfo = data.getExtras();
                     if (routingInfo != null) {
                         routeToView = (int) routingInfo.get(HealthyWayAppActivities.HealthyWayViews.VIEW_CHANGE_PASSWORD_ACTIVITY.getName());
                     }
                 } else {
-                    Log.d(TAG, "Returned from Controller with cancel");
+                    if (DEBUG) Log.d(TAG, "Returned from Controller with cancel");
                     routeToView = HealthyWayAppActivities.SETTINGS;
                 }
                 break;
             case HealthyWayAppActivities.MASTER:
                 if (resultCode == Activity.RESULT_OK) {
-                    Log.d(TAG, String.format("Returned from %s", HealthyWayAppActivities.HealthyWayViews.VIEW_MASTER.getName()));
+                    if (DEBUG) Log.d(TAG, String.format("Returned from %s", HealthyWayAppActivities.HealthyWayViews.VIEW_MASTER.getName()));
                     routingInfo = data.getExtras();
                     if (routingInfo != null) {
                         routeToView = (int) routingInfo.get(HealthyWayAppActivities.HealthyWayViews.VIEW_MASTER.getName());
                     }
                 } else {
-                    Log.d(TAG, String.format("Returned from %s with Cancel", HealthyWayAppActivities.HealthyWayViews.VIEW_MASTER.getName()));
+                    if (DEBUG) Log.d(TAG, String.format("Returned from %s with Cancel", HealthyWayAppActivities.HealthyWayViews.VIEW_MASTER.getName()));
                     routeToView = HealthyWayAppActivities.MASTER;
                 }
                 break;
             case HealthyWayAppActivities.CREATE_NEW_ACCOUNT:
                 if (resultCode == Activity.RESULT_OK) {
-                    Log.d(TAG, String.format("Returned from %s", HealthyWayAppActivities.HealthyWayViews.VIEW_CREATE_NEW_ACCOUNT.getName()));
+                    if (DEBUG) Log.d(TAG, String.format("Returned from %s", HealthyWayAppActivities.HealthyWayViews.VIEW_CREATE_NEW_ACCOUNT.getName()));
                     routingInfo = data.getExtras();
                     if (routingInfo != null) {
                         routeToView = (int) routingInfo.get(HealthyWayAppActivities.HealthyWayViews.VIEW_CREATE_NEW_ACCOUNT.getName());
                     }
                 } else {
-                    Log.d(TAG, String.format("Returned from %s with Cancel", HealthyWayAppActivities.HealthyWayViews.VIEW_CREATE_NEW_ACCOUNT.getName()));
+                    if (DEBUG) Log.d(TAG, String.format("Returned from %s with Cancel", HealthyWayAppActivities.HealthyWayViews.VIEW_CREATE_NEW_ACCOUNT.getName()));
                     routeToView = HealthyWayAppActivities.LOGIN_ACTIVITY;
                 }
 
                 break;
             case HealthyWayAppActivities.FORGOTTEN_PASSWORD:
                 if (resultCode == Activity.RESULT_OK) {
-                    Log.d(TAG, String.format("Returned from %s", HealthyWayAppActivities.HealthyWayViews.VIEW_FORGOTTEN_PASSWORD.getName()));
+                    if (DEBUG) Log.d(TAG, String.format("Returned from %s", HealthyWayAppActivities.HealthyWayViews.VIEW_FORGOTTEN_PASSWORD.getName()));
                     routingInfo = data.getExtras();
                     if (routingInfo != null) {
                         routeToView = (int) routingInfo.get(HealthyWayAppActivities.HealthyWayViews.VIEW_FORGOTTEN_PASSWORD.getName());
                     }
                 } else {
-                    Log.d(TAG, String.format("Returned from %s with Cancel", HealthyWayAppActivities.HealthyWayViews.VIEW_FORGOTTEN_PASSWORD.getName()));
+                    if (DEBUG) Log.d(TAG, String.format("Returned from %s with Cancel", HealthyWayAppActivities.HealthyWayViews.VIEW_FORGOTTEN_PASSWORD.getName()));
                     routeToView = HealthyWayAppActivities.LOGIN_ACTIVITY;
                 }
                 break;
             case HealthyWayAppActivities.LOADING_PLEASE_WAIT:
                 if (resultCode == Activity.RESULT_OK) {
-                    Log.d(TAG, String.format("Returned from %s", HealthyWayAppActivities.HealthyWayViews.VIEW_LOADING_PLEASE_WAIT.getName()));
+                    if (DEBUG) Log.d(TAG, String.format("Returned from %s", HealthyWayAppActivities.HealthyWayViews.VIEW_LOADING_PLEASE_WAIT.getName()));
                     routingInfo = data.getExtras();
                     if (routingInfo != null) {
                         routeToView = (int) routingInfo.get(HealthyWayAppActivities.HealthyWayViews.VIEW_LOADING_PLEASE_WAIT.getName());
                     }
                 } else {
-                    Log.d(TAG, String.format("Returned from %s with Cancel", HealthyWayAppActivities.HealthyWayViews.VIEW_LOADING_PLEASE_WAIT.getName()));
+                    if (DEBUG) Log.d(TAG, String.format("Returned from %s with Cancel", HealthyWayAppActivities.HealthyWayViews.VIEW_LOADING_PLEASE_WAIT.getName()));
                     routeToView = HealthyWayAppActivities.LOADING_PLEASE_WAIT;
                 }
                 break;
             case HealthyWayAppActivities.LOGIN_ACTIVITY:
                 if (resultCode == Activity.RESULT_OK) {
-                    Log.d(TAG, String.format("Returned from %s", HealthyWayAppActivities.HealthyWayViews.VIEW_LOGIN_ACTIVITY.getName()));
+                    if (DEBUG) Log.d(TAG, String.format("Returned from %s", HealthyWayAppActivities.HealthyWayViews.VIEW_LOGIN_ACTIVITY.getName()));
                     routingInfo = data.getExtras();
                     if (routingInfo != null) {
                         routeToView = (int) routingInfo.get(HealthyWayAppActivities.HealthyWayViews.VIEW_LOGIN_ACTIVITY.getName());
                     }
                 } else {
-                    Log.d(TAG, String.format("Returned from %s with Cancel", HealthyWayAppActivities.HealthyWayViews.VIEW_LOGIN_ACTIVITY.getName()));
+                    if (DEBUG) Log.d(TAG, String.format("Returned from %s with Cancel", HealthyWayAppActivities.HealthyWayViews.VIEW_LOGIN_ACTIVITY.getName()));
                     routeToView = HealthyWayAppActivities.LOGIN_ACTIVITY;
                 }
                 break;
             case HealthyWayAppActivities.SETTINGS:
                 if (resultCode == Activity.RESULT_OK) {
-                    Log.d(TAG, String.format("Returned from %s", HealthyWayAppActivities.HealthyWayViews.VIEW_SETTINGS.getName()));
+                    if (DEBUG) Log.d(TAG, String.format("Returned from %s", HealthyWayAppActivities.HealthyWayViews.VIEW_SETTINGS.getName()));
                     routingInfo = data.getExtras();
                     if (routingInfo != null) {
                         routeToView = (int) routingInfo.get(HealthyWayAppActivities.HealthyWayViews.VIEW_SETTINGS.getName());
                     }
                 } else {
-                    Log.d(TAG, String.format("Returned from %s with Cancel", HealthyWayAppActivities.HealthyWayViews.VIEW_SETTINGS.getName()));
+                    if (DEBUG) Log.d(TAG, String.format("Returned from %s with Cancel", HealthyWayAppActivities.HealthyWayViews.VIEW_SETTINGS.getName()));
                     routeToView = HealthyWayAppActivities.MASTER;
                 }
                 break;
             default:
-                Log.i(TAG, "Bad requestCode from onActivityResult" + requestCode);
+                Log.e(TAG, "Bad requestCode from onActivityResult" + requestCode);
                 routeToView = HealthyWayAppActivities.CONTROLLER;
                 break;
         }
@@ -194,7 +194,7 @@ public class Controller extends AppCompatActivity {
                 break;
 
             default:
-                Log.i(TAG, "Bad segue from switchActivities" + segue);
+                Log.e(TAG, "Bad segue from switchActivities" + segue);
                 break;
         }
     }

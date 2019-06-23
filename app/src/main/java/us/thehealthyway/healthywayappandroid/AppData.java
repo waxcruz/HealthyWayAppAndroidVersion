@@ -24,7 +24,7 @@ public class AppData extends Application {
     public static String packageName;
     public static final String TAG = "HW.AppData";
     //  enables (true) or disables (false) debug logcat messages
-    public static final boolean DEBUG = true;  // reset to "false" for submission
+    public static final boolean DEBUG = false;  // reset to "false" for submission
 
 
 
@@ -38,7 +38,7 @@ public class AppData extends Application {
 
         //  gets package name
         packageName = getPackageName();
-        Log.i(TAG, "package: " + packageName);
+        if (DEBUG) Log.d(TAG, "package: " + packageName);
 
         if (DEBUG) Log.d(TAG, "onCreate exit");
     }

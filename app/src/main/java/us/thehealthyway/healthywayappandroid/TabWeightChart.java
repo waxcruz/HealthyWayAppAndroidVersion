@@ -215,8 +215,10 @@ public class TabWeightChart extends Fragment {
             chartLabels.add(mmddDisplay(weightDate));
             xValue += 1.0;
         }
-        Log.i(TAG, "lineChartUdate: chartSeries: " + chartSeries.size());
-        Log.i(TAG, "lineChartUdate: chartLabels: " + chartLabels.size());
+        if (DEBUG) {
+            Log.d(TAG, "lineChartUdate: chartSeries: " + chartSeries.size());
+            Log.d(TAG, "lineChartUdate: chartLabels: " + chartLabels.size());
+        }
         LineDataSet weightDataSet = new LineDataSet(chartSeries, "Weight Loss/Gain");
         weightDataSet.setColor(ContextCompat.getColor(getContext(), R.color.hw_green));
         weightDataSet.setValueTextColor(ContextCompat.getColor(getContext(), R.color.hw_green));
@@ -225,13 +227,16 @@ public class TabWeightChart extends Fragment {
             @Override
 
             public String getFormattedValue(float value, AxisBase axis) {
-                Log.i(TAG, "getFormattedValue: value = " + value);
-                Log.i(TAG, "getFormattedValue: axis = " + axis.toString());
+                if (DEBUG) {
+                    Log.d(TAG, "getFormattedValue: value = " + value);
+                    Log.d(TAG, "getFormattedValue: axis = " + axis.toString());
+
+                }
                 if (((int) value ) >= chartLabels.size() || ((int) value) < 0) {
-                    Log.i(TAG, "getFormattedValue: out of bounds index" + ((int) value));
+                    if (DEBUG) Log.d(TAG, "getFormattedValue: out of bounds index" + ((int) value));
                     return "bad label at " + value;
                 } else {
-                    Log.i(TAG, "getFormattedValue: getFormattedValue =" + chartLabels.get((int) value));
+                    if (DEBUG) Log.d(TAG, "getFormattedValue: getFormattedValue =" + chartLabels.get((int) value));
                     return  chartLabels.get((int) value);                }
 
             }

@@ -114,7 +114,7 @@ public class MasterActivity extends AppCompatActivity
 
     public void onFragmentInteraction(HW_Enumerations.TabNames tabIndex, HW_Enumerations.SubTabNames subTabIndex) {
 
-        Log.d(TAG, "onFragmentInteraction: ");
+        if (DEBUG) Log.d(TAG, "onFragmentInteraction: ");
         FragmentTransaction ft;
         Fragment newFragment = new Fragment();
         switch (tabIndex) {

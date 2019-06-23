@@ -273,14 +273,14 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
             if (v instanceof EditText) {
                 onFocusValue = ((EditText) v).getText().toString();
                 focusView = v;
-                Log.d(TAG, "onFocusChange (on), value: " + onFocusValue);
+                if (DEBUG) Log.d(TAG, "onFocusChange (on), value: " + onFocusValue);
             }
         } else {
             if (v instanceof EditText) {
                 offFocusValue = ((EditText) v).getText().toString();
-                Log.d(TAG, "onFocusChange (off), value: " + offFocusValue);
+                if (DEBUG) Log.d(TAG, "onFocusChange (off), value: " + offFocusValue);
                 if (v.getId() != focusView.getId()) {
-                    Log.d(TAG, "onFocusChange: " + "missed focus transition");
+                    if (DEBUG) Log.d(TAG, "onFocusChange: " + "missed focus transition");
                 } else {
                     if (onFocusValue.equals(offFocusValue)) {
                         return;
@@ -325,7 +325,7 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
                 keyed_enter_veggies_consumption = changedData;
                 break;
             default:
-                Log.d(TAG, "captureDataChange: CODE ME");
+                if (DEBUG) Log.d(TAG, "captureDataChange: CODE ME");
         }
 
     }
@@ -467,7 +467,7 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
                         }
                         break;
                     default:
-                        Log.d(TAG, "onClick: bad OnClick view ID");
+                        Log.e(TAG, "onClick: bad OnClick view ID");
                         return;
                 }
                 lastMealSelected.setSelected(true);
@@ -928,7 +928,7 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
                 break;
             default:
                 lastMealSelected.setSelected(true);
-                Log.d(TAG, "highlightMealSelected: bad meal");
+                Log.e(TAG, "highlightMealSelected: bad meal");
                 break;
         }
         lastMealSelected.setSelected(true);
@@ -1180,7 +1180,7 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
         emailIntent.addFlags(emailIntent.FLAG_ACTIVITY_NEW_TASK);
         try {
             startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-            Log.i(TAG, "sendEmailToStaff: Done.");
+            if (DEBUG) Log.d(TAG, "sendEmailToStaff: Done.");
             client_message.setText("Journal sent attached to email");
         } catch (android.content.ActivityNotFoundException ex) {
             client_message.setText("There is no email client installed.");
@@ -1190,10 +1190,10 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
     private String saveHtmlFile(String journalFileName, String journal) {
         String returnThePath = "";
         if (isExternalStorageWritable()) {
-            Log.i(TAG, "saveHtmlFile: Storage ready");
+            if (DEBUG) Log.d(TAG, "saveHtmlFile: Storage ready");
         } else
         if (isExternalStorageReadable()) {
-            Log.i(TAG, "saveHtmlFile: Read only storage");
+            if (DEBUG) Log.d(TAG, "saveHtmlFile: Read only storage");
         } else {
             client_message.setText("No external storage available");
         }
@@ -1740,7 +1740,7 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
             }
             return false;
         } else {
-            Log.i(TAG, "clearPermissionsForStorageAccess: permission granted");
+            if (DEBUG) Log.d(TAG, "clearPermissionsForStorageAccess: permission granted");
             return true;
         }
 
