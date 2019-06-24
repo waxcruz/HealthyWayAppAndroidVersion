@@ -104,10 +104,24 @@ public class CreateNewAccount extends AppCompatActivity {
         createEmailKeyed = createMailAccount.getText().toString();
         createAccountPasswordKeyed = createAccountPassword.getText().toString();
         createAccountPasswordConfirmationKeyed = createAccountPasswordConfirmation.getText().toString();
+        // basic edits
+        if (!Helpers.isValidEmail(createEmailKeyed)) {
+            message.setText("Email address invalid. Try again");
+            return;
+        }
+        if (createAccountPasswordKeyed.length() == 0) {
+            message.setText("No password entered. Try again");
+            return;
+        }
+        if (createAccountPasswordKeyed.length() == 0) {
+            message.setText("No confirmation password entered. Try again");
+            return;
+        }
         if (!(createAccountPasswordKeyed.equals(createAccountPasswordConfirmationKeyed))) {
             message.setText("Passwords mismatched. Try again");
             return;
         }
+
         model.createAuthUserNode(createEmailKeyed, createAccountPasswordKeyed,
                 (message)-> {authErrorDisplay(message); },
                 ()-> {creationOfClientSucceeded(); } );

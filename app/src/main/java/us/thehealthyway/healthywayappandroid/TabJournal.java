@@ -12,6 +12,7 @@ import android.os.Bundle;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
@@ -48,6 +49,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import static androidx.core.content.FileProvider.getUriForFile;
 import static us.thehealthyway.healthywayappandroid.Helpers.doubleFromObject;
 import static us.thehealthyway.healthywayappandroid.AppData.DEBUG;
 /**
@@ -198,7 +200,13 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
         }
         // Instantiate enumeration singleton classes
         HW_Meals meals = HW_Meals.getInstance();
+        if (meals == null) {
+            Log.e(TAG, "onCreate: meals not instantiated", null );
+        }
         HW_FoodValues foodTypes = HW_FoodValues.getInstance();
+        if (foodTypes == null) {
+            Log.e(TAG, "onCreate: foodTypes not instantiated", null );
+        }
 
         mealSelected = HW_Enumerations.Meals.BREAKFAST;
         selectedDateFromDatePicker = myCalendar.getTime(); // post current time
@@ -389,13 +397,13 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
                 CheckBox box = (CheckBox) groupCheckboxes.get(checkIndex);
                 if (box.isChecked()) {
                     if (checkIndex < 8) {
-                        if (track_water_checks == -1) {
+                        if (track_water_checks <= -1) {
                             track_water_checks = 0;
                         }
                         track_water_checks++;
                     } else {
                         if (checkIndex < 11) {
-                            if (track_supplements_checks == -1) {
+                            if (track_supplements_checks <= -1) {
                                 track_supplements_checks = 0;
                             }
                             track_supplements_checks++;
@@ -418,6 +426,7 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
                 showDataEntryButtons();
                 break;
             default:
+
                 lastMealSelected.setSelected(false);
                 lastMealSelected.setBackgroundColor(Color.parseColor("#FFFFFF"));
                 lastMealSelected.setTextColor(Color.parseColor("#4A2353"));
@@ -429,46 +438,52 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
                     }
                 }
                 mealNode = new HashMap<>();
-                switch (v.getId()) {
-                    case R.id.breakfast_button:
-                        mealSelected = HW_Enumerations.Meals.BREAKFAST;
-                        if (mealContentsContentsOnDate.containsKey(KeysForFirebase.BREAKFAST_MEAL_KEY)) {
-                            mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.BREAKFAST_MEAL_KEY);
-                        }
-                        break;
-                    case R.id.mornng_snack_button:
-                        mealSelected = HW_Enumerations.Meals.MORNING_SNACK;
-                        if (mealContentsContentsOnDate.containsKey(KeysForFirebase.BREAKFAST_MEAL_KEY)) {
-                            mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.MORNING_SNACK_MEAL_KEY);
-                        }
-                        break;
-                    case R.id.lunch_button:
-                        mealSelected = HW_Enumerations.Meals.LUNCH;
-                        if (mealContentsContentsOnDate.containsKey(KeysForFirebase.LUNCH_MEAL_KEY)){
-                            mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.LUNCH_MEAL_KEY);
-                        }
-                        break;
-                    case R.id.afternoon_snack_button:
-                        mealSelected = HW_Enumerations.Meals.AFTERNOON_SNACK;
-                        if (mealContentsContentsOnDate.containsKey(KeysForFirebase.AFTERNOON_SNACK_MEAL_KEY)){
-                            mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.AFTERNOON_SNACK_MEAL_KEY);
-                        }
-                        break;
-                    case R.id.dinner_button:
-                        mealSelected = HW_Enumerations.Meals.DINNER;
-                        if (mealContentsContentsOnDate.containsKey(KeysForFirebase.DINNER_MEAL_KEY)){
-                            mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.DINNER_MEAL_KEY);
-                        }
-                        break;
-                    case R.id.evening_snack_button:
-                        mealSelected = HW_Enumerations.Meals.EVENING_SNACK;
-                        if (mealContentsContentsOnDate.containsKey(KeysForFirebase.EVENING_SNACK_MEAL_KEY)){
-                            mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.EVENING_SNACK_MEAL_KEY);
-                        }
-                        break;
-                    default:
-                        Log.e(TAG, "onClick: bad OnClick view ID");
-                        return;
+                try {
+                    switch (v.getId()) {
+                        case R.id.breakfast_button:
+                            mealSelected = HW_Enumerations.Meals.BREAKFAST;
+                            if (true == mealContentsContentsOnDate.containsKey(KeysForFirebase.BREAKFAST_MEAL_KEY)) {
+                                mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.BREAKFAST_MEAL_KEY);
+                            }
+                            break;
+                        case R.id.mornng_snack_button:
+                            mealSelected = HW_Enumerations.Meals.MORNING_SNACK;
+                            if (true == mealContentsContentsOnDate.containsKey(KeysForFirebase.MORNING_SNACK_MEAL_KEY)) {
+                                mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.MORNING_SNACK_MEAL_KEY);
+                            }
+                            break;
+                        case R.id.lunch_button:
+                            mealSelected = HW_Enumerations.Meals.LUNCH;
+                            if (true == mealContentsContentsOnDate.containsKey(KeysForFirebase.LUNCH_MEAL_KEY)) {
+                                mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.LUNCH_MEAL_KEY);
+                            }
+                            break;
+                        case R.id.afternoon_snack_button:
+                            mealSelected = HW_Enumerations.Meals.AFTERNOON_SNACK;
+                            if (true == mealContentsContentsOnDate.containsKey(KeysForFirebase.AFTERNOON_SNACK_MEAL_KEY)) {
+                                mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.AFTERNOON_SNACK_MEAL_KEY);
+                            }
+                            break;
+                        case R.id.dinner_button:
+                            mealSelected = HW_Enumerations.Meals.DINNER;
+                            if (true == mealContentsContentsOnDate.containsKey(KeysForFirebase.DINNER_MEAL_KEY)) {
+                                mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.DINNER_MEAL_KEY);
+                            }
+                            break;
+                        case R.id.evening_snack_button:
+                            mealSelected = HW_Enumerations.Meals.EVENING_SNACK;
+                            if (true == mealContentsContentsOnDate.containsKey(KeysForFirebase.EVENING_SNACK_MEAL_KEY)) {
+                                mealNode = (Map<String, Object>) mealContentsContentsOnDate.get(KeysForFirebase.EVENING_SNACK_MEAL_KEY);
+                            }
+                            break;
+                        default:
+                            Log.e(TAG, "onClick: bad OnClick view ID");
+                            return;
+                    }
+                }  catch (Exception e) {
+                    Log.e(TAG, "onClick: exception e:" + e );
+                    e.printStackTrace();
+                    Log.e(TAG, "onClick: mealContentsContentsOnDate" + mealContentsContentsOnDate);
                 }
                 lastMealSelected.setSelected(true);
                 lastMealSelected.setBackgroundColor(Color.parseColor("#4A2353"));
@@ -1161,7 +1176,6 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
         // save html to local file
         String journalFileName = "journalAttachment2.html";
         String pathToJournalAttachment = saveHtmlFile(journalFileName, htmlBodyMail);
-
         // address email
         String[] TO = {model.getSignedInEmail()};
         String[] CC = {""};
@@ -1173,8 +1187,24 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Journal");
         // prep journal for attaching to email
 
-        emailIntent.putExtra(emailIntent.EXTRA_STREAM,
-                Uri.fromFile(new File(pathToJournalAttachment)));
+
+        File  newFile = new File(pathToJournalAttachment);
+
+        try {
+            Uri contentUri = getUriForFile(getContext(),
+                    "us.thehealthyway.healthywayappandroid.fileprovider",
+                    newFile);
+            emailIntent.putExtra(emailIntent.EXTRA_STREAM,
+                    contentUri
+            );
+        } catch (Exception e){
+            String errorMsg = "error accessing " + pathToJournalAttachment + e.getLocalizedMessage();
+            Log.i(TAG, "mailJournal: " + errorMsg);
+        }
+
+
+
+
 
         emailIntent.putExtra(emailIntent.EXTRA_TEXT, "Open attachment to see the Healthy Way journal for you.");
         emailIntent.addFlags(emailIntent.FLAG_ACTIVITY_NEW_TASK);
@@ -1428,12 +1458,15 @@ public class TabJournal extends Fragment implements View.OnClickListener, View.O
         if (journalDetails != null) {
             if (journalDetails.get(KeysForFirebase.GLASSES_OF_WATER) != null) {
                 waterCheckCount = ((Number)(journalDetails.get(KeysForFirebase.GLASSES_OF_WATER))).intValue();
+                if (waterCheckCount < 0 || waterCheckCount > 8) waterCheckCount = 0;
             }
             if (journalDetails.get(KeysForFirebase.SUPPLEMENTS) != null) {
                 supplementCheckCount = ((Number)(journalDetails.get(KeysForFirebase.SUPPLEMENTS))).intValue();
+                if (supplementCheckCount < 0 || supplementCheckCount > 3) supplementCheckCount = 0;
             }
             if (journalDetails.get(KeysForFirebase.EXERCISED) != null){
                 exerciseCheckCount = ((Number)(journalDetails.get(KeysForFirebase.EXERCISED))).intValue();
+                if (exerciseCheckCount < 0 || exerciseCheckCount > 1) exerciseCheckCount = 0;
             }
         }
         String checkMarks = TextUtils.join("",Collections.nCopies(waterCheckCount,"&#x2714; "));

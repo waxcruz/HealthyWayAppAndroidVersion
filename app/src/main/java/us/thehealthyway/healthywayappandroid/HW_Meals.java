@@ -26,10 +26,10 @@ public class HW_Meals {
 
     public static final int MealsBreaksfast = 0;
     public static final int MealsMorningSnack = 1;
-    public static final int MealsLimitLunch = 2;
-    public static final int MealsLimitAfternoonSnack = 3;
-    public static final int MealsLimitDinner= 4;
-    public static final int MealsLimitEveningSnack = 5;
+    public static final int MealsLunch = 2;
+    public static final int MealsAfternoonSnack = 3;
+    public static final int MealsDinner= 4;
+    public static final int MealsEveningSnack = 5;
 
     private HW_Meals() {
         // throw new AssertionError();
