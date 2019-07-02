@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         model = Model.getInstance();
         // Set up the login form.
         clientEmail = (EditText) findViewById(R.id.client_old_password);
-        clientEmail.setText("waxcoder@yahoo.com");
+        clientEmail.setText("");
         clientEmail.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         clientPassword = (EditText) findViewById(R.id.client_new_password);
-        clientPassword.setText("client");
+        clientPassword.setText("");
         clientPassword.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {

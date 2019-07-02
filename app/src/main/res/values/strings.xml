@@ -1,7 +1,7 @@
 <resources>
     <string name="app_full_name">Healthy Way App</string>
 
-    <string name="title_activity_login">Log in to Healthy Way Admin</string>
+    <string name="title_activity_login">Log in to The Healthy Way</string>
     <!-- Strings related to login -->
     <string name="prompt_email">enter email address</string>Log in
     <string name="prompt_password">enter password</string>
@@ -117,7 +117,7 @@
     <string name="press_to_create_new_account">press to create new account</string>
     <string name="sign_in">Sign In</string>
     <string name="cancel">Cancel</string>
-    <string name="log_in_to_healthy_way_admin">Log in to Healthy Way Admin</string>
+    <string name="log_in_to_healthy_way_admin">Log in to the Healthy Way</string>
     <string name="submit">Submit</string>
     <string name="reset_password">Reset Password</string>
     <string name="enter_client_email_address">enter client email address</string>
@@ -126,14 +126,14 @@
     <string name="weight_chart">weight chart</string>
     <string name="journal_details">Journal Details</string>
     <string name="weight_chart_goes_here">Weight Chart Goes Here</string>
-    <string name="admin_account">Admin Account</string>
+    <string name="admin_account">My Account</string>
     <string name="sign_out">Sign out</string>
     <string name="change_password">Change Password</string>
     <string name="confirm_password">confirm password</string>
     <string name="old_password">old password</string>
     <string name="new_password">new password</string>
     <string name="submit_text">Submit</string>
-    <string name="forgotten_password">Forgotten Password</string>
+    <string name="forgotten_password">Forgot Password</string>
     <string name="enter_your_account_email_address_you_ll_receive_an_email_with_instructions_to_reset_your_account_password_once_you_finish_the_reset_of_your_password_login_again">Enter your account email address. You\'ll receive an email with instructions to reset your account password. Once you finish the reset of your password, login again.</string>
     <string name="clear_search_text">clear search text</string>
     <string name="the_healthy_way_icon">The Healthy Way Icon</string>
